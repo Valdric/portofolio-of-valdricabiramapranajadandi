@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Valdric Abirama Pranaja Dandi - Curriculum Vitae</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Curriculum Vitae of Valdric Abirama Pranaja Dandi - Informatics Engineering Student, Web & Game Developer.">
+    <meta name="author" content="Valdric Abirama Pranaja Dandi">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              creamBg: '#FAF9F6',
+              creamHighlight: '#FFF6C6',
+              charcoalText: '#121212',
+              cobaltBlue: '#416afc',
+              pastelPink: '#ffa5c6',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Prevent Dark Theme Flash -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Print media styling override */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #121212 !important;
+                font-size: 12px !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .cv-container {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+                background-color: #ffffff !important;
+            }
+            #custom-cursor, #custom-cursor-dot {
+                display: none !important;
+            }
+            body, a, button, [role="button"] {
+                cursor: auto !important;
+            }
+            .cv-section-title, .project-print-card, .skills-block {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 1.5cm 1.2cm 1.5cm 1.2cm;
+            }
+        }
+    </style>
+</head>
+<body class="bg-creamBg text-charcoalText antialiased min-h-screen selection:bg-creamHighlight selection:text-charcoalText">
+
+    <!-- Custom Cursor (Desktop Only) - Hidden on Touch -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="custom-cursor-dot" class="hidden md:block"></div>
+
+    <!-- UTILITY CONTROL HEADER (Sticky Top, Hidden on Print) -->
+    <header class="no-print sticky top-0 left-0 right-0 z-30 w-full bg-creamBg/90 backdrop-blur-md border-b-2 border-charcoalText py-4 px-6 md:px-12 flex justify-between items-center font-tech">
+        <a href="index.html" class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:text-cobaltBlue transition-colors group">
+            <span>←</span>
+            <span>Back to Portfolio</span>
+        </a>
+        <div class="flex items-center space-x-3">
+            <button id="theme-toggle-btn" class="px-4 py-2 border-2 border-charcoalText hover:bg-charcoalText hover:text-creamBg text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300">
+                [ ☾ Dark ]
+            </button>
+            <button onclick="window.print()" class="px-6 py-2.5 bg-charcoalText hover:bg-cobaltBlue text-creamBg font-bold text-xs uppercase tracking-wider rounded-full transition-all duration-300">
+                [ Print CV / Save PDF ]
+            </button>
+        </div>
+    </header>
+
+    <!-- CV SHEET WRAPPER -->
+    <main class="max-w-5xl mx-auto my-8 px-4 md:px-8 print:my-0 print:px-0">
+        <div class="cv-container bg-creamBg border-2 border-charcoalText rounded-2xl md:rounded-3xl p-8 md:p-12 shadow-xl print:border-none print:shadow-none print:p-0 print:bg-white">
+            
+            <!-- HEADER BLOCK (Grid Name / Contact / Avatar) -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b-2 border-charcoalText items-center print:grid-cols-12 print:gap-4 print:pb-6">
+                
+                <!-- Title and Details -->
+                <div class="md:col-span-8 flex flex-col space-y-4 print:col-span-9">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-charcoalText/60 font-tech mb-2 block print:mb-1">[ Curriculum Vitae ]</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter uppercase font-tech leading-tight select-none">
+                            Valdric Abirama<br>
+                            <span class="text-cobaltBlue">Pranaja Dandi</span>
+                        </h1>
+                        <p class="text-sm md:text-base font-tech uppercase tracking-wide font-bold text-charcoalText/85 mt-2">
+                            Informatics Engineering Student & Web/Game Developer
+                        </p>
+                    </div>
+
+                    <!-- Contact Details Underlines -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-xs font-tech font-bold uppercase text-charcoalText pt-2 print:grid-cols-2 print:gap-x-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-charcoalText/40">Mail:</span>
+                            <a href="mailto:valdricapd@gmail.com" class="text-cobaltBlue hover:underline">valdricapd@gmail.com</a>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-charcoalText/40">Github:</span>
+                            <a href="https://github.com/Valdric" target="_blank" class="hover:text-cobaltBlue transition-all">github.com/Valdric ↗</a>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-charcoalText/40">Loc:</span>
+                            <span>Indonesia (WIB)</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-charcoalText/40">Status:</span>
+                            <span class="text-emerald-600 print:text-charcoalText">Open for projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar Block -->
+                <div class="md:col-span-4 flex justify-center md:justify-end print:col-span-3">
+                    <div class="relative w-32 h-32 md:w-36 md:h-36 group border-2 border-charcoalText p-1 bg-creamHighlight rounded-2xl print:w-28 print:h-28 print:rounded-xl">
+                        <div class="w-full h-full overflow-hidden border border-charcoalText rounded-xl bg-creamBg">
+                            <img src="public/images/valdric.jpg" alt="Valdric Abirama Pranaja Dandi" class="w-full h-full object-cover grayscale print:grayscale-0">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TWO-COLUMN BODY LAYOUT -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-10 print:grid-cols-12 print:gap-6 print:pt-6">
+                
+                <!-- LEFT COLUMN: Profile summary, competencies, education -->
+                <div class="lg:col-span-5 flex flex-col space-y-10 print:col-span-5 print:space-y-6">
+                    
+                    <!-- SUMMARY SECTION -->
+                    <div class="flex flex-col space-y-3 print:space-y-2">
+                        <div class="flex items-center space-x-2 font-tech cv-section-title">
+                            <span class="text-xs font-bold text-cobaltBlue">01 /</span>
+                            <h2 class="text-sm font-extrabold uppercase tracking-widest">Profile Summary</h2>
+                        </div>
+                        <p class="text-charcoalText/85 text-xs md:text-sm leading-relaxed">
+                            An Informatics Engineering student focused on building highly functional systems. I have a deep passion for solving complex architectural problems, designing scalable full-stack web and mobile apps, and building interactive, code-driven mechanics. Focused on clean grids, modular layouts, and visual and technical clarity.
+                        </p>
+                    </div>
+
+                    <!-- CORE COMPETENCIES -->
+                    <div class="flex flex-col space-y-4 print:space-y-3">
+                        <div class="flex items-center space-x-2 font-tech cv-section-title">
+                            <span class="text-xs font-bold text-cobaltBlue">02 /</span>
+                            <h2 class="text-sm font-extrabold uppercase tracking-widest">Core Skills</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4 print:gap-3">
+                            <!-- Category 1 -->
+                            <div class="border-2 border-charcoalText p-4 rounded-xl bg-creamBg print:p-3 print:border print:rounded-lg skills-block">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-charcoalText/50 font-tech mb-1.5">[ Core Code ]</div>
+                                <h3 class="text-xs font-bold font-tech mb-2 uppercase">Languages</h3>
+                                <p class="font-bold text-[10px] uppercase tracking-wide text-charcoalText/85 font-tech">
+                                    JavaScript, Python, C++, C#, Dart, PHP
+                                </p>
+                            </div>
+                            <!-- Category 2 -->
+                            <div class="border-2 border-charcoalText p-4 rounded-xl bg-creamBg print:p-3 print:border print:rounded-lg skills-block">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-charcoalText/50 font-tech mb-1.5">[ Frontend ]</div>
+                                <h3 class="text-xs font-bold font-tech mb-2 uppercase">Interfaces</h3>
+                                <p class="font-bold text-[10px] uppercase tracking-wide text-charcoalText/85 font-tech">
+                                    HTML5, CSS3, Tailwind CSS, React.js
+                                </p>
+                            </div>
+                            <!-- Category 3 -->
+                            <div class="border-2 border-charcoalText p-4 rounded-xl bg-creamBg print:p-3 print:border print:rounded-lg skills-block">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-charcoalText/50 font-tech mb-1.5">[ Interactive ]</div>
+                                <h3 class="text-xs font-bold font-tech mb-2 uppercase">Mobile & Game</h3>
+                                <p class="font-bold text-[10px] uppercase tracking-wide text-charcoalText/85 font-tech">
+                                    Flutter, Unity 2D/3D, Aseprite Sprite Sheets
+                                </p>
+                            </div>
+                            <!-- Category 4 -->
+                            <div class="border-2 border-charcoalText p-4 rounded-xl bg-creamBg print:p-3 print:border print:rounded-lg skills-block">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-charcoalText/50 font-tech mb-1.5">[ Data & Versioning ]</div>
+                                <h3 class="text-xs font-bold font-tech mb-2 uppercase">Databases & Tools</h3>
+                                <p class="font-bold text-[10px] uppercase tracking-wide text-charcoalText/85 font-tech">
+                                    SQL Databases, Git, GitHub, REST APIs
+                                </p>
+                            </div>
+                            <!-- Category 5 -->
+                            <div class="border-2 border-charcoalText p-4 rounded-xl bg-creamBg print:p-3 print:border print:rounded-lg skills-block">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-charcoalText/50 font-tech mb-1.5">[ Creative Media ]</div>
+                                <h3 class="text-xs font-bold font-tech mb-2 uppercase">Video Editing</h3>
+                                <p class="font-bold text-[10px] uppercase tracking-wide text-charcoalText/85 font-tech">
+                                    DaVinci Resolve, CapCut, Alight Motion
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDUCATION SECTION -->
+                    <div class="flex flex-col space-y-3 print:space-y-2">
+                        <div class="flex items-center space-x-2 font-tech cv-section-title">
+                            <span class="text-xs font-bold text-cobaltBlue">03 /</span>
+                            <h2 class="text-sm font-extrabold uppercase tracking-widest">Education</h2>
+                        </div>
+                        <div class="border-l-2 border-charcoalText pl-4 py-1 flex flex-col space-y-1.5 print:border-l print:pl-3">
+                            <h3 class="text-xs font-bold font-tech uppercase text-charcoalText">Universitas Pasundan</h3>
+                            <p class="text-charcoalText/80 text-[11px] font-tech font-bold uppercase">
+                                Informatics Engineering Student (S1)
+                            </p>
+                            <div class="flex items-center space-x-3 text-[10px] font-tech text-charcoalText/60 font-bold uppercase">
+                                <span>GPA: 3.71 / 4.00</span>
+                                <span>•</span>
+                                <span>Bandung, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Projects list -->
+                <div class="lg:col-span-7 flex flex-col space-y-6 print:col-span-7 print:space-y-4">
+                    
+                    <div class="flex items-center space-x-2 font-tech cv-section-title">
+                        <span class="text-xs font-bold text-cobaltBlue">04 /</span>
+                        <h2 class="text-sm font-extrabold uppercase tracking-widest">Projects Registry</h2>
+                    </div>
+
+                    <!-- Projects list container -->
+                    <div class="space-y-5 print:space-y-4">
+                        
+                        <!-- Project 1 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Cashier App ("Gosir")
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Systems ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    A point-of-sale mobile transaction client built on Flutter, integrating encrypted local caches with dynamic relational SQL database logging structures. Features a barcode scanner simulation, custom receipt exports, inventory metrics, and transaction history logs.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Flutter</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Dart</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">SQL</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Mobile POS</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://github.com/Valdric" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">GitHub Link ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #01</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 2 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Soul Extractor / Spectral
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    A narrative survival horror game concept built in Unity 2D. Integrates custom C# raycasting vision fields, procedural ambient audio triggers, and dark atmospheric environments with custom sprite sheets designed frame-by-frame in Aseprite.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Unity 2D</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">C#</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Aseprite</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Game Dev</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://github.com/Valdric" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">GitHub Link ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #02</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 3 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Ooga Booga Attack
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    An action survival game built for the Global Game Jam 2026. Control a tribal defender fighting off waves of incoming ancient creatures and wild bosses. Built within 48 hours using Unity and custom C# physics velocity components.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Unity 2D</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">C#</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Game Jam</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Action</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://globalgamejam.org/games/2026/ooga-booga-attack-4" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">GGJ Portal ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #03</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 4 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Her Fallacy
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    A dark, atmospheric story-driven survival horror game where you explore a haunted forest populated by strange creatures. Features custom field-of-view raycasting, procedural inventory slots, ambient sound mixers, and custom animations drawn frame-by-frame in Aseprite.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Unity 2D</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">C#</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Aseprite</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://vulcanova-team.itch.io/her-fallacy" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Itch.io Portal ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #04</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 5 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Slider
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    An intense retro-inspired bullet-hell shooter game set in deep space. Control a highly maneuverable starship to fight off alien swarm invaders and giant bosses. Integrated with vector velocity movement, custom projectile pools, and particle explosion fields.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Unity 2D</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">C#</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Game Design</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://ritssss.itch.io/slider" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Itch.io Portal ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #05</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 6 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        RoadToUnpas
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    An interactive campus simulator game designed to guide new university students through the landmarks, departments, and academic procedures of Universitas Pasundan. Features detailed dialog trees, character profiles, quest systems, and map tracking hubs.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Unity / Godot</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Visual Novel</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Education</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://xinsooval.itch.io/roadtounpas" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Itch.io Portal ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #06</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 7 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Intro Buddy
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Game Dev ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    A colorful, interactive learning companion app designed to assist children in developing spelling, arithmetic, and spatial puzzles. Built with high-fidelity asset animations, audio guides, and drag-and-drop drag interfaces.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Mobile / Web</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Educational</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">UX Design</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://drive.google.com/file/d/1POhiEGRmkLEpbC-SuMvMwek9q0Ps08WZ/view?usp=drive_link" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Asset Drive ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #07</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 8 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        Personal Web Portfolio v1
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Systems ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    A minimalist personal portfolio website built with clean grid interfaces, dark theme elements, and custom CSS page-scroll triggers.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">HTML5</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">CSS3</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">JS</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Web Dev</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://valdric.github.io/itw2023_project1_233040163/" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Live Site ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #08</span>
+                            </div>
+                        </article>
+
+                        <!-- Project 9 -->
+                        <article class="project-print-card border-2 border-charcoalText rounded-xl p-5 bg-creamBg hover:bg-creamHighlight/50 transition-all duration-300 flex flex-col justify-between print:p-4 print:border print:rounded-lg print:bg-white">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-sm font-extrabold font-tech text-charcoalText uppercase leading-snug">
+                                        KA24 Food Landing Page
+                                    </h3>
+                                    <span class="text-[8px] font-bold tracking-wider font-tech uppercase text-charcoalText/50 print:text-[7px]">
+                                        [ Systems ]
+                                    </span>
+                                </div>
+                                <p class="text-charcoalText/85 text-[11px] leading-relaxed mb-3 print:text-[10px] print:mb-2">
+                                    An interactive food order landing page styled in high contrast colors, carrying dynamic search inputs, menu panels, and reservation metrics.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mb-3 print:mb-2">
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">HTML5</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">CSS3</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">JS</span>
+                                <span class="px-2 py-0.5 border border-charcoalText/25 text-charcoalText/80 text-[8px] font-bold tracking-wider font-tech uppercase rounded print:px-1.5 print:py-0 print:text-[7px]">Culinary UI</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider font-tech pt-2.5 border-t border-charcoalText/10 mt-1 print:pt-1.5 print:text-[8px]">
+                                <a href="https://valdric.github.io/itw2023_project2_233040163/" target="_blank" class="text-cobaltBlue hover:underline transition-all font-bold">Live Site ↗</a>
+                                <span class="text-charcoalText/50 font-bold font-tech">Order ID: #09</span>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Print Footer block -->
+    <footer class="hidden print:block py-6 text-center text-[9px] font-tech font-bold uppercase tracking-wider text-charcoalText/50">
+        Curriculum Vitae • Valdric Abirama Pranaja Dandi • Generate timestamp: 2026-06-18
+    </footer>
+
+    <!-- Interactive Custom Cursor Hook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle preferences handler
+            function applyTheme() {
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                const toggleBtns = document.querySelectorAll('#theme-toggle-btn');
+                if (currentTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.body.classList.add('dark');
+                    toggleBtns.forEach(btn => btn.textContent = '[ ☀ Light ]');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.body.classList.remove('dark');
+                    toggleBtns.forEach(btn => btn.textContent = '[ ☾ Dark ]');
+                }
+            }
+            applyTheme();
+
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('#theme-toggle-btn');
+                if (btn) {
+                    const currentTheme = localStorage.getItem('theme') || 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme();
+                }
+            });
+
+            // Setup custom cursor
+            const cursor = document.getElementById('custom-cursor');
+            const cursorDot = document.getElementById('custom-cursor-dot');
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            if (cursor && cursorDot) {
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    cursorDot.style.left = `${mouseX}px`;
+                    cursorDot.style.top = `${mouseY}px`;
+                });
+
+                function animateCursor() {
+                    const lerpFactor = 0.15;
+                    cursorX += (mouseX - cursorX) * lerpFactor;
+                    cursorY += (mouseY - cursorY) * lerpFactor;
+                    
+                    cursor.style.left = `${cursorX}px`;
+                    cursor.style.top = `${cursorY}px`;
+                    
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+
+                function attachHoverListeners() {
+                    const hoverables = document.querySelectorAll('a, button, input, textarea, select, .project-print-card, [role="button"]');
+                    hoverables.forEach(item => {
+                        item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                        item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+                    });
+                }
+                attachHoverListeners();
+            }
+        });
+    </script>
+</body>
+</html>

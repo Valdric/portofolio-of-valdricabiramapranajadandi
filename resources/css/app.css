@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    
+    --color-creamBg: #FAF9F6;
+    --color-creamHighlight: #FFF6C6;
+    --color-charcoalText: #121212;
+    --color-cobaltBlue: #416afc;
+    --color-pastelPink: #ffa5c6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-creamBg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-charcoalText);
+    border-radius: 3px;
+}
+
+/* Typography styles */
+.font-tech {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Cursor (Desktops only) */
+#custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--color-charcoalText);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none !important;
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#custom-cursor.hovered {
+    width: 45px;
+    height: 45px;
+    background-color: var(--color-cobaltBlue);
+    border-color: var(--color-cobaltBlue);
+    opacity: 0.15;
+    pointer-events: none !important;
+}
+
+#custom-cursor-dot {
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-charcoalText);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none !important;
+    z-index: 9999;
+}
+
+/* Dark mode theme variable redefinitions */
+:root.dark {
+    --color-creamBg: #121212;
+    --color-creamHighlight: #1e1e1e;
+    --color-charcoalText: #FAF9F6;
+    --color-cobaltBlue: #6384ff;
+    --color-pastelPink: #ff8fb7;
+}
+
+/* Hide default cursor on desktop */
+@media (min-width: 768px) {
+    body, a, button, input, textarea, select, [role="button"], .carousel-slide {
+        cursor: none !important;
+    }
+}
+
+/* Disable custom cursor on touchscreens */
+@media (pointer: coarse) {
+    #custom-cursor, #custom-cursor-dot {
+        display: none !important;
+    }
+    body, a, button, input, textarea, select, [role="button"] {
+        cursor: auto !important;
+    }
+}
+
+/* Bottom Nav Dock */
+.bottom-nav-dock {
+    background-color: rgba(250, 249, 246, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid #121212;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ScrollSpy Active Link */
+.nav-link-active {
+    background-color: #121212 !important;
+    color: #FAF9F6 !important;
+}
+
+/* Print-Editorial Grid Layout */
+.editorial-grid {
+    border-top: 2px solid #121212;
+}
+.editorial-col {
+    border-right: 2px solid #121212;
+}
+.editorial-row {
+    border-bottom: 2px solid #121212;
+}
+
+/* Horizontal Scroll Projects Slider */
+.horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+.horizontal-scroll-container::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+.carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+@media (min-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 50%;
+    }
+}
+@media (min-width: 1024px) {
+    .carousel-slide {
+        flex: 0 0 33.333%;
+    }
+}
+
+/* Underline Inputs (Minimalist Form) */
+.minimal-input {
+    background: transparent;
+    border-bottom: 1.5px solid #121212;
+    color: #121212;
+    transition: border-color 0.3s ease;
+}
+.minimal-input:focus {
+    border-color: #416afc;
+    outline: none;
+}
+
+/* Custom transitions and transforms */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* Physics Sandbox canvas outline */
+#physics-canvas {
+    background: #FAF9F6;
+    border: 1.5px solid #121212;
+    cursor: none;
+}
+
+/* Scroll reveal class animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Loop animations for marquee */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-content {
+    display: inline-block;
+    animation: marquee 25s linear infinite;
+}
+
+/* Preloader slide up transitions */
+#preloader {
+    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+#preloader.preloader-hidden {
+    transform: translateY(-100%);
+}
+
+/* Hero slide-up title clip */
+.hero-slide-up {
+    transform: translateY(105%);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-slide-up.revealed {
+    transform: translateY(0%);
+}
+
+/* Global Print Media Utilities */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    #preloader, #custom-cursor, #custom-cursor-dot {
+        display: none !important;
+    }
+}
