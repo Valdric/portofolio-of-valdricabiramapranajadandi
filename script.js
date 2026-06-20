@@ -544,11 +544,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg> DISPATCHING...
       `;
 
-      fetch('https://formsubmit.co/ajax/valdricapd@gmail.com', {
+      fetch('/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name: name,
@@ -556,7 +555,12 @@ document.addEventListener('DOMContentLoaded', () => {
           message: message
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Server error');
+        }
+        return response.json();
+      })
       .then(data => {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
