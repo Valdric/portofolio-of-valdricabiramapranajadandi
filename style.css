@@ -5,13 +5,30 @@
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Outfit', sans-serif;
   
-  --color-bg: #FAF9F6;
-  --color-bg-alt: #FFF6C6; /* Warm yellow highlight from poch.studio */
-  --color-text-primary: #121212;
-  --color-text-secondary: #4A4A4A;
-  --color-accent-blue: #416afc; /* Cobalt blue */
-  --color-accent-pink: #ffa5c6; /* Pastel pink */
-  --color-border: rgba(18, 18, 18, 0.08);
+  --color-bg-rgb: 250, 249, 246;
+  --color-bg-alt-rgb: 255, 246, 198;
+  --color-text-primary-rgb: 18, 18, 18;
+  --color-text-secondary-rgb: 74, 74, 74;
+  --color-accent-blue-rgb: 65, 106, 252;
+  --color-accent-pink-rgb: 255, 165, 198;
+  
+  --color-bg: rgb(var(--color-bg-rgb));
+  --color-bg-alt: rgb(var(--color-bg-alt-rgb));
+  --color-text-primary: rgb(var(--color-text-primary-rgb));
+  --color-text-secondary: rgb(var(--color-text-secondary-rgb));
+  --color-accent-blue: rgb(var(--color-accent-blue-rgb));
+  --color-accent-pink: rgb(var(--color-accent-pink-rgb));
+  --color-border: rgba(var(--color-text-primary-rgb), 0.08);
+  --color-bg-dock: rgba(var(--color-bg-rgb), 0.85);
+}
+
+:root.dark {
+  --color-bg-rgb: 18, 18, 18;
+  --color-bg-alt-rgb: 30, 30, 30;
+  --color-text-primary-rgb: 250, 249, 246;
+  --color-text-secondary-rgb: 160, 160, 160;
+  --color-accent-blue-rgb: 99, 132, 255;
+  --color-accent-pink-rgb: 255, 143, 183;
 }
 
 * {
@@ -108,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Bottom Nav Dock */
 .bottom-nav-dock {
-  background-color: rgba(250, 249, 246, 0.85);
+  background-color: var(--color-bg-dock);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-text-primary);
@@ -188,7 +205,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom styling for physics canvas */
 #physics-canvas {
-  background: #FAF9F6;
+  background: var(--color-bg);
   border: 1.5px solid var(--color-text-primary);
   cursor: none;
 }

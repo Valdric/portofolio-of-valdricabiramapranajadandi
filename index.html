@@ -16,11 +16,11 @@
       theme: {
         extend: {
           colors: {
-            creamBg: '#FAF9F6',
-            creamHighlight: '#FFF6C6',
-            charcoalText: '#121212',
-            cobaltBlue: '#416afc',
-            pastelPink: '#ffa5c6',
+            creamBg: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-bg-rgb), ${opacityValue})` : `rgb(var(--color-bg-rgb))`,
+            creamHighlight: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-bg-alt-rgb), ${opacityValue})` : `rgb(var(--color-bg-alt-rgb))`,
+            charcoalText: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-text-primary-rgb), ${opacityValue})` : `rgb(var(--color-text-primary-rgb))`,
+            cobaltBlue: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-accent-blue-rgb), ${opacityValue})` : `rgb(var(--color-accent-blue-rgb))`,
+            pastelPink: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-accent-pink-rgb), ${opacityValue})` : `rgb(var(--color-accent-pink-rgb))`,
           }
         }
       }
