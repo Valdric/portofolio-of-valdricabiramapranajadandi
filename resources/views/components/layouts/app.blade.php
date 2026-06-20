@@ -6,7 +6,7 @@
     <title>Valdric Abirama Pranaja Dandi | Portfolio</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Valdric Abirama Pranaja Dandi | Portfolio - Informatics Engineering, Web & Game Developer. Designed in the aesthetic style of poch.studio.">
+    <meta name="description" content="Valdric Abirama Pranaja Dandi | Portfolio - Informatics Engineering, Web & Game Developer.">
     <meta name="keywords" content="Valdric Abirama Pranaja Dandi, Portfolio, Informatics Engineering, Developer, Game Dev, Flutter, Unity, Poch Studio Style">
     <meta name="author" content="Valdric Abirama Pranaja Dandi">
 

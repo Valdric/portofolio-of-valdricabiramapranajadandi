@@ -368,7 +368,7 @@
 
     <!-- FOOTER -->
     <footer class="py-12 border-t border-charcoalText/20 px-6 md:px-12 text-center text-xs font-tech font-bold uppercase tracking-widest text-charcoalText/60 mb-20 z-10 relative bg-creamBg">
-        <span>&copy; 2026 Valdric Abirama Pranaja Dandi. Designed in the aesthetic style of poch.studio.</span>
+        <span>&copy; 2026 Valdric Abirama Pranaja Dandi.</span>
     </footer>
 
     <!-- MODAL: LIGHT EDITORIAL PHYSICS SANDBOX -->
