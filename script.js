@@ -544,7 +544,20 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg> DISPATCHING...
       `;
 
-      setTimeout(() => {
+      fetch('https://formsubmit.co/ajax/valdricapd@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
         contactForm.reset();
@@ -552,7 +565,13 @@ document.addEventListener('DOMContentLoaded', () => {
         successModal.classList.remove('hidden');
         successModal.classList.add('flex');
         document.body.style.overflow = 'hidden';
-      }, 1200);
+      })
+      .catch(error => {
+        console.error('Error submitting form:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        alert('An error occurred while sending the message. Please try again.');
+      });
     });
 
     closeSuccessBtn.addEventListener('click', () => {

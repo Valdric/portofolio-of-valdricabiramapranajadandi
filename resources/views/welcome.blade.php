@@ -351,8 +351,8 @@
                         <span class="text-[10px] block text-charcoalText/50 tracking-wider mb-4">Follow Systems</span>
                         <div class="flex space-x-6 text-sm">
                             <a href="https://github.com/Valdric" target="_blank" class="hover:text-cobaltBlue transition-all">Github ↗</a>
-                            <a href="https://linkedin.com" target="_blank" class="hover:text-cobaltBlue transition-all">LinkedIn ↗</a>
-                            <a href="https://instagram.com" target="_blank" class="hover:text-cobaltBlue transition-all">Instagram ↗</a>
+                            <a href="https://www.linkedin.com/in/valdric-abirama-pranaja-dandi" target="_blank" class="hover:text-cobaltBlue transition-all">LinkedIn ↗</a>
+                            <a href="https://www.instagram.com/valdronout/" target="_blank" class="hover:text-cobaltBlue transition-all">Instagram ↗</a>
                         </div>
                     </div>
                 </div>
