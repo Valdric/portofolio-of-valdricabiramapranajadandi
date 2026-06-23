@@ -31,7 +31,7 @@
     <div id="custom-cursor-dot" class="hidden md:block"></div>
 
     <!-- Preloader Intro Overlay -->
-    <div id="preloader" class="fixed inset-0 w-full h-full bg-[#121212] text-creamBg z-50 flex flex-col justify-between p-8 md:p-16">
+    <div id="preloader" class="fixed inset-0 w-full h-full bg-[#121212] text-creamBg dark:text-charcoalText z-50 flex flex-col justify-between p-8 md:p-16">
         <div class="flex justify-between items-center font-tech text-[10px] uppercase font-bold tracking-widest opacity-60">
             <span>[ Valdric.sys ]</span>
             <span>Boot sequence in progress</span>
@@ -41,7 +41,7 @@
             <h1 class="text-4xl md:text-7xl font-extrabold tracking-tighter uppercase font-tech leading-[0.85] mb-4 overflow-hidden">
                 <span id="preloader-text" class="inline-block">initializing</span>
             </h1>
-            <div class="w-48 md:w-64 h-[1.5px] bg-creamBg/20 relative mt-4 overflow-hidden">
+            <div class="w-48 md:w-64 h-[1.5px] bg-creamBg/20 dark:bg-charcoalText/20 relative mt-4 overflow-hidden">
                 <div id="preloader-bar" class="absolute left-0 top-0 h-full bg-cobaltBlue" style="width: 0%"></div>
             </div>
         </div>

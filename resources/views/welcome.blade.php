@@ -60,7 +60,7 @@
     </section>
 
     <!-- INFINITE RUNNING MARQUEE (Poch Studio detail) -->
-    <div class="w-full bg-[#121212] text-creamBg py-4 border-b-2 border-charcoalText overflow-hidden marquee-container font-tech uppercase font-bold text-xs md:text-sm tracking-widest z-10 relative">
+    <div class="w-full bg-[#121212] text-creamBg dark:text-charcoalText py-4 border-b-2 border-charcoalText overflow-hidden marquee-container font-tech uppercase font-bold text-xs md:text-sm tracking-widest z-10 relative">
         <div class="marquee-content flex space-x-12">
             <span>Informatics Engineering student ✦ Full Stack Developer ✦ Game Dev Enthusiast ✦ Flutter Specialist ✦ Web & Mobile Systems ✦ Unity Sandbox ✦</span>
             <span>Informatics Engineering student ✦ Full Stack Developer ✦ Game Dev Enthusiast ✦ Flutter Specialist ✦ Web & Mobile Systems ✦ Unity Sandbox ✦</span>
@@ -513,7 +513,7 @@
             <div class="w-full md:w-1/2 bg-[#121212] flex items-center justify-center p-4 border-b-2 md:border-b-0 md:border-r-2 border-charcoalText overflow-hidden relative min-h-[250px] md:min-h-0">
                 <img id="lightbox-img" src="" alt="Milestone Image" class="max-w-full max-h-[35vh] md:max-h-[70vh] object-contain rounded-lg">
                 <!-- Watermark -->
-                <span class="absolute bottom-3 left-3 text-[9px] font-tech font-bold uppercase text-creamBg/40 tracking-wider">[ library.arch ]</span>
+                <span class="absolute bottom-3 left-3 text-[9px] font-tech font-bold uppercase text-creamBg/40 dark:text-charcoalText/40 tracking-wider">[ library.arch ]</span>
             </div>
 
             <!-- Right Side: Editorial Info Content -->
