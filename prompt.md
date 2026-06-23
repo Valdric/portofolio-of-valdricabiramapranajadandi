@@ -46,7 +46,7 @@ Generate clean, production-ready code split into three separate files: `index.ht
 #### F. About Me (Editorial Grid)
 - Divided using clean black lines (`border-2 border-charcoalText`).
 - Left Column: Cyberpunk avatar profile picture (`avatar.jpg`) encased in a solid black border container with a soft yellow background.
-- Right Column: Professional bio outlining engineering capabilities, paired with a flat 4-block grid displaying stats: GPA (3.71+), Projects (12+), Hours Coded (1.5k+), and Game Jams (4+).
+- Right Column: Professional bio outlining engineering capabilities, paired with a flat 4-block grid displaying stats: GPA (3.55+), Projects (12+), Hours Coded (1.5k+), and Game Jams (4+).
 
 #### G. Tech Stack & Competencies Section
 - Clean four-column layout categorized as Programming Languages, Frontend, Mobile & Game Dev, Tools & Databases. Hovering over a card dynamically morphs the card background to highlights of yellow, pink, or light cobalt.

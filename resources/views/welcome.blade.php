@@ -109,7 +109,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-4 border-2 border-charcoalText rounded-xl overflow-hidden divide-x-2 divide-y-2 md:divide-y-0 divide-charcoalText text-center font-tech bg-creamBg">
                         <!-- Stat -->
                         <div class="p-6 flex flex-col justify-center items-center">
-                            <div class="text-2xl md:text-3xl font-extrabold text-cobaltBlue">3.71+</div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-cobaltBlue">3.55+</div>
                             <div class="text-[9px] uppercase tracking-wider font-bold text-charcoalText/60 mt-1">GPA Score</div>
                         </div>
                         <!-- Stat -->

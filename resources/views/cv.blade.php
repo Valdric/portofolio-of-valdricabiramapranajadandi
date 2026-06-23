@@ -212,7 +212,7 @@
                                 Informatics Engineering Student (S1)
                             </p>
                             <div class="flex items-center space-x-3 text-[10px] font-tech text-charcoalText/60 font-bold uppercase">
-                                <span>GPA: 3.71 / 4.00</span>
+                                <span>GPA: 3.55 / 4.00</span>
                                 <span>•</span>
                                 <span>Bandung, Indonesia</span>
                             </div>
