@@ -39,6 +39,9 @@
 </head>
 <body class="bg-creamBg text-charcoalText antialiased">
 
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-cobaltBlue z-[99999] transition-all duration-75" style="width: 0%"></div>
+
   <!-- ==========================================
        CUSTOM CURSOR
        ========================================== -->
@@ -187,24 +190,24 @@
           </p>
 
           <!-- Stats Grid Layout -->
-          <div class="grid grid-cols-2 md:grid-cols-4 border-2 border-charcoalText rounded-xl overflow-hidden divide-x-2 divide-y-2 md:divide-y-0 divide-charcoalText text-center font-tech">
+          <div class="grid grid-cols-2 md:grid-cols-4 border-2 border-charcoalText rounded-xl overflow-hidden text-center font-tech">
             <!-- Stat -->
-            <div class="bg-creamBg p-6 flex flex-col justify-center items-center">
+            <div class="bg-creamBg p-6 flex flex-col justify-center items-center border-r-2 border-b-2 md:border-b-0 border-charcoalText">
               <div class="text-2xl md:text-3xl font-extrabold text-cobaltBlue">3.55+</div>
               <div class="text-[9px] uppercase tracking-wider font-bold text-charcoalText/60 mt-1">GPA Score</div>
             </div>
             <!-- Stat -->
-            <div class="bg-creamBg p-6 flex flex-col justify-center items-center">
+            <div class="bg-creamBg p-6 flex flex-col justify-center items-center border-b-2 md:border-b-0 md:border-r-2 border-charcoalText">
               <div class="text-2xl md:text-3xl font-extrabold text-charcoalText">12+</div>
               <div class="text-[9px] uppercase tracking-wider font-bold text-charcoalText/60 mt-1">Projects Done</div>
             </div>
             <!-- Stat -->
-            <div class="bg-creamBg p-6 flex flex-col justify-center items-center">
+            <div class="bg-creamBg p-6 flex flex-col justify-center items-center border-r-2 border-charcoalText">
               <div class="text-2xl md:text-3xl font-extrabold text-cobaltBlue">1.5k+</div>
               <div class="text-[9px] uppercase tracking-wider font-bold text-charcoalText/60 mt-1">Hours Coded</div>
             </div>
             <!-- Stat -->
-            <div class="bg-creamBg p-6 flex flex-col justify-center items-center">
+            <div class="bg-creamBg p-6 flex flex-col justify-center items-center border-charcoalText">
               <div class="text-2xl md:text-3xl font-extrabold text-charcoalText">4+</div>
               <div class="text-[9px] uppercase tracking-wider font-bold text-charcoalText/60 mt-1">Game Jams</div>
             </div>
@@ -994,7 +997,7 @@
 
         <!-- Forms Right -->
         <div class="lg:col-span-7">
-          <form id="contact-form" class="space-y-8 p-8 border-2 border-charcoalText rounded-2xl bg-creamBg">
+          <form id="contact-form" class="space-y-8 p-6 sm:p-8 border-2 border-charcoalText rounded-2xl bg-creamBg">
             <!-- Name -->
             <div class="flex flex-col space-y-2">
               <label for="form-name" class="text-[10px] font-bold uppercase tracking-widest font-tech text-charcoalText/50">Your Name</label>
@@ -1024,10 +1027,7 @@
     </div>
   </section>
 
-  <!-- ==========================================
-       BOTTOM FLOATING NAVIGATION DOCK
-       ========================================== -->
-  <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bottom-nav-dock px-3 py-2.5 rounded-full flex items-center justify-center space-x-1 border-2 border-charcoalText">
+  <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bottom-nav-dock px-3 py-2.5 rounded-full hidden md:flex items-center justify-center space-x-1 border-2 border-charcoalText">
     <a href="#hero" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Home</a>
     <a href="#about" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">About</a>
     <a href="#skills" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
@@ -1036,6 +1036,44 @@
     <a href="cv.html" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">CV</a>
     <a href="#contact" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
   </nav>
+
+  <!-- ==========================================
+       MOBILE BOTTOM NAVIGATION DOCK
+       ========================================== -->
+  <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bottom-nav-dock px-4 py-2 rounded-full flex md:hidden items-center justify-between space-x-4 border-2 border-charcoalText w-[90%] max-w-[340px]">
+    <a href="#hero" class="nav-link px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">[ HOME ]</a>
+    <button id="mobile-menu-btn" class="px-5 py-1.5 bg-charcoalText text-creamBg dark:bg-creamBg dark:text-charcoalText text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300 font-tech">[ MENU ]</button>
+    <button id="mobile-theme-toggle-btn" class="px-3 py-1.5 border-2 border-charcoalText hover:bg-charcoalText hover:text-creamBg text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300 font-tech">
+      [ ☾ ]
+    </button>
+  </nav>
+
+  <!-- ==========================================
+       MOBILE MENU OVERLAY
+       ========================================== -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 w-full h-full bg-[#121212]/95 backdrop-blur-lg text-creamBg dark:text-charcoalText hidden flex-col justify-between p-8 z-50 transition-all duration-300">
+    <div class="flex justify-between items-center font-tech text-[10px] uppercase font-bold tracking-widest opacity-60">
+      <span>[ Valdric.sys ]</span>
+      <button id="close-mobile-menu" class="px-3 py-1 border border-creamBg/20 hover:border-creamBg hover:text-cobaltBlue text-[10px] uppercase tracking-wider rounded-full transition-all duration-300 text-creamBg">
+        [ Close ✖ ]
+      </button>
+    </div>
+    
+    <div class="my-auto flex flex-col items-start space-y-6">
+      <a href="#hero" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 01. Home ]</a>
+      <a href="#about" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 02. About ]</a>
+      <a href="#skills" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 03. Skills ]</a>
+      <a href="#projects" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 04. Work ]</a>
+      <a href="#library" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 05. Library ]</a>
+      <a href="cv.html" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 06. CV ]</a>
+      <a href="#contact" class="mobile-menu-link text-4xl font-extrabold tracking-tighter uppercase font-tech hover:text-cobaltBlue transition-colors">[ 07. Contact ]</a>
+    </div>
+
+    <div class="flex justify-between items-end font-tech text-[9px] uppercase tracking-wider opacity-60">
+      <span>Loc: Indonesia</span>
+      <span>© 2026</span>
+    </div>
+  </div>
 
   <!-- ==========================================
        FOOTER

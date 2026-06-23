@@ -729,6 +729,95 @@ body::after {
   animation: shimmer 1.8s linear infinite;
 }
 
+/* =============================================
+   MOBILE OVERLAY NAV & RESPONSIVE POLISH
+   ============================================= */
+
+/* Scroll progress bar style */
+#scroll-progress {
+  transition: width 0.1s ease-out;
+}
+
+/* Mobile Menu Overlay Animation */
+#mobile-menu-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex !important;
+}
+
+#mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile Menu Links slide up staggered entries */
+.mobile-menu-link {
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+  display: inline-block;
+}
+
+#mobile-menu-overlay.open .mobile-menu-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger transition delay for links */
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(4) { transition-delay: 0.25s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(5) { transition-delay: 0.3s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(6) { transition-delay: 0.35s; }
+#mobile-menu-overlay.open .mobile-menu-link:nth-child(7) { transition-delay: 0.4s; }
+
+/* Responsive widths for Carousel Project Cards */
+.carousel-slide {
+  width: 85vw !important;
+  max-width: 380px;
+}
+
+@media (min-width: 640px) {
+  .carousel-slide {
+    width: 350px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-slide {
+    width: 380px !important;
+  }
+}
+
+/* Mobile Milestone Lightbox constraints */
+@media (max-width: 767px) {
+  #lib-lightbox > div {
+    flex-direction: column !important;
+    max-height: 92vh !important;
+  }
+  #lightbox-img {
+    max-height: 22vh !important;
+  }
+  #lib-lightbox .w-full.md\:w-1\/2.bg-\[\#121212\] {
+    min-height: 180px !important;
+    height: 180px !important;
+    padding: 12px !important;
+  }
+  #lib-lightbox .w-full.md\:w-1\/2.p-6 {
+    padding: 16px !important;
+  }
+}
+
+/* Fix cursor pointer coarse rule for mobile menu buttons to override default cursor styles */
+@media (pointer: coarse) {
+  .mobile-menu-link, #close-mobile-menu, #mobile-menu-btn, #mobile-theme-toggle-btn {
+    cursor: pointer !important;
+  }
+}
+
+
 
 
 

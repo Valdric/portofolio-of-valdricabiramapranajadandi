@@ -4,21 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   function applyTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
-    const toggleBtns = document.querySelectorAll('#theme-toggle-btn');
+    const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #mobile-theme-toggle-btn');
     if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
-      toggleBtns.forEach(btn => btn.textContent = '[ ☀ Light ]');
+      toggleBtns.forEach(btn => {
+        if (btn.id === 'mobile-theme-toggle-btn') {
+          btn.textContent = '[ ☀ ]';
+        } else {
+          btn.textContent = '[ ☀ Light ]';
+        }
+      });
     } else {
       document.documentElement.classList.remove('dark');
       document.body.classList.remove('dark');
-      toggleBtns.forEach(btn => btn.textContent = '[ ☾ Dark ]');
+      toggleBtns.forEach(btn => {
+        if (btn.id === 'mobile-theme-toggle-btn') {
+          btn.textContent = '[ ☾ ]';
+        } else {
+          btn.textContent = '[ ☾ Dark ]';
+        }
+      });
     }
   }
   applyTheme();
 
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('#theme-toggle-btn');
+    const btn = e.target.closest('#theme-toggle-btn') || e.target.closest('#mobile-theme-toggle-btn');
     if (btn) {
       const currentTheme = localStorage.getItem('theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -213,6 +225,39 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         nextBtn.style.opacity = '1';
       }
+    });
+
+    // Mouse Drag-to-Scroll Implementation
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+      isDown = true;
+      scrollContainer.classList.remove('cursor-grab');
+      scrollContainer.classList.add('cursor-grabbing');
+      startX = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+      isDown = false;
+      scrollContainer.classList.remove('cursor-grabbing');
+      scrollContainer.classList.add('cursor-grab');
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+      isDown = false;
+      scrollContainer.classList.remove('cursor-grabbing');
+      scrollContainer.classList.add('cursor-grab');
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scrollContainer.offsetLeft;
+      const walk = (x - startX) * 1.5; // Scroll multiplier
+      scrollContainer.scrollLeft = scrollLeft - walk;
     });
   }
 
@@ -960,6 +1005,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ==========================================
+  // MOBILE MENU OVERLAY CONTROLLER
+  // ==========================================
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+  if (mobileMenuBtn && closeMobileMenuBtn && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuOverlay.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenuOverlay.classList.add('open');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeMobileMenu = () => {
+      mobileMenuOverlay.classList.remove('open');
+      setTimeout(() => {
+        mobileMenuOverlay.classList.add('hidden');
+      }, 400); // match transition duration
+      document.body.style.overflow = '';
+    };
+
+    closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) {
+        closeMobileMenu();
+      }
+    });
+  }
+
+  // ==========================================
+  // SCROLL PROGRESS INDICATOR
+  // ==========================================
+  const scrollProgress = document.getElementById('scroll-progress');
+  if (scrollProgress) {
+    const handleScrollProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        scrollProgress.style.width = `${progress}%`;
+      } else {
+        scrollProgress.style.width = '0%';
+      }
+    };
+    window.addEventListener('scroll', handleScrollProgress);
+    handleScrollProgress(); // Initial check
+  }
 });
 
 // ==========================================
@@ -1210,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
   }
 
-  // Apply to hero h1 spans on hover
+  // Apply to hero h1 spans on hover & tap
   const heroSpans = document.querySelectorAll('.hero-slide-up');
   heroSpans.forEach(span => {
     const orig = span.textContent.trim();
@@ -1218,13 +1321,19 @@ document.addEventListener('DOMContentLoaded', () => {
     span.addEventListener('mouseenter', () => {
       scramble(span, orig, 700);
     });
+    span.addEventListener('click', () => {
+      scramble(span, orig, 700);
+    });
   });
 
-  // Apply to section headings h2 on hover
+  // Apply to section headings h2 on hover & tap
   const headings = document.querySelectorAll('h2');
   headings.forEach(h => {
     const orig = h.textContent.trim();
     h.addEventListener('mouseenter', () => {
+      scramble(h, orig, 600);
+    });
+    h.addEventListener('click', () => {
       scramble(h, orig, 600);
     });
   });
