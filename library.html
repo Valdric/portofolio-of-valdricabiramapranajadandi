@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Valdric Abirama Pranaja Dandi - Library of Valdric</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Library Catalog of Valdric Abirama Pranaja Dandi - Leadership, Organizational Milestones, and Hackathons.">
+    <meta name="author" content="Valdric Abirama Pranaja Dandi">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              creamBg: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-bg-rgb), ${opacityValue})` : `rgb(var(--color-bg-rgb))`,
+              creamHighlight: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-bg-alt-rgb), ${opacityValue})` : `rgb(var(--color-bg-alt-rgb))`,
+              charcoalText: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-text-primary-rgb), ${opacityValue})` : `rgb(var(--color-text-primary-rgb))`,
+              cobaltBlue: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-accent-blue-rgb), ${opacityValue})` : `rgb(var(--color-accent-blue-rgb))`,
+              pastelPink: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--color-accent-pink-rgb), ${opacityValue})` : `rgb(var(--color-accent-pink-rgb))`,
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Prevent Dark Theme Flash -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-creamBg text-charcoalText antialiased">
+
+    <!-- Custom Cursor (Desktop Only) -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="custom-cursor-dot" class="hidden md:block"></div>
+
+    <!-- Preloader Intro Overlay -->
+    <div id="preloader" class="fixed inset-0 w-full h-full bg-[#121212] text-creamBg z-50 flex flex-col justify-between p-8 md:p-16">
+        <div class="flex justify-between items-center font-tech text-[10px] uppercase font-bold tracking-widest opacity-60">
+            <span>[ Valdric.sys ]</span>
+            <span>Boot sequence in progress</span>
+        </div>
+        
+        <div class="my-auto flex flex-col items-start justify-center">
+            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tighter uppercase font-tech leading-[0.85] mb-4 overflow-hidden">
+                <span id="preloader-text" class="inline-block">initializing</span>
+            </h1>
+            <div class="w-48 md:w-64 h-[1.5px] bg-creamBg/20 relative mt-4 overflow-hidden">
+                <div id="preloader-bar" class="absolute left-0 top-0 h-full bg-cobaltBlue" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-end font-tech font-bold text-3xl md:text-5xl uppercase tracking-tighter">
+            <span>Loading</span>
+            <span id="preloader-percent">00%</span>
+        </div>
+    </div>
+
+    <!-- TOP STATUS HEADER -->
+    <header class="w-full border-b-2 border-charcoalText bg-creamBg px-6 md:px-12 py-6 flex justify-between items-center z-30 relative font-tech">
+        <!-- Brand Logo -->
+        <a href="index.html" class="text-xl md:text-2xl font-extrabold tracking-tighter uppercase flex items-center space-x-1.5">
+            <span class="px-2 py-0.5 bg-charcoalText text-creamBg rounded-sm">V</span>
+            <span>Abirama</span>
+        </a>
+        
+        <!-- Status & Theme Toggle -->
+        <div class="flex items-center space-x-6">
+            <div class="hidden sm:flex items-center space-x-6 text-[11px] font-bold uppercase tracking-wider text-charcoalText/75">
+                <div class="flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 inline-block animate-pulse"></span>
+                    <span>Open for commissions</span>
+                </div>
+                <div class="border-l border-charcoalText/20 h-4"></div>
+                <div>
+                    <span>Loc: Indonesia</span>
+                </div>
+            </div>
+            <button id="theme-toggle-btn" class="px-4 py-2 border-2 border-charcoalText hover:bg-charcoalText hover:text-creamBg text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300">
+                [ ☾ Dark ]
+            </button>
+        </div>
+    </header>
+
+    <!-- LIBRARY HERO HEADER -->
+    <section class="py-16 px-6 md:px-12 border-b-2 border-charcoalText bg-creamBg relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="space-y-4 max-w-2xl">
+                <div class="flex items-center space-x-3 font-tech text-cobaltBlue text-xs font-bold uppercase tracking-widest">
+                    <span>[ 📁 Library Catalog ]</span>
+                </div>
+                <h1 class="text-4xl md:text-7xl font-extrabold uppercase tracking-tighter leading-none font-tech">
+                    Library of Valdric
+                </h1>
+                <p class="text-charcoalText/75 text-sm md:text-base leading-relaxed">
+                    A curated archive documenting organizational milestones, campus representation, community contributions, and game design hackathons.
+                </p>
+            </div>
+            <div class="font-tech text-right text-xs text-charcoalText/50 uppercase tracking-widest hidden md:block">
+                <span>Updated: June 2026</span><br>
+                <span>Index: 03 Categories</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN GALLERY CONTENT -->
+    <section class="py-16 px-6 md:px-12 bg-creamBg relative z-10 pb-36">
+        <div class="max-w-7xl mx-auto space-y-24">
+
+            <!-- CATEGORY 1: Brand Ambassador Fakultas Teknik Unpas -->
+            <div class="space-y-8">
+                <!-- Section Title -->
+                <div class="flex items-center justify-between border-b-2 border-charcoalText pb-4">
+                    <div class="flex items-center space-x-3 font-tech">
+                        <span class="text-xs font-bold text-cobaltBlue">01 /</span>
+                        <h2 class="text-xl md:text-2xl font-extrabold uppercase tracking-tight">Duta Kampus / Brand Ambassador</h2>
+                    </div>
+                    <span class="px-3 py-1 bg-creamHighlight text-charcoalText text-[10px] font-bold uppercase tracking-wider rounded-md border border-charcoalText font-tech">Fakultas Teknik Unpas</span>
+                </div>
+
+                <!-- Editorial Asymmetric Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Left Copy (4 cols) -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <h3 class="text-2xl font-extrabold uppercase font-tech leading-tight">Representing the Engineering Faculty</h3>
+                        <p class="text-charcoalText/80 text-sm leading-relaxed">
+                            Selected as the **Brand Ambassador (Duta Kampus) of the Faculty of Engineering, Universitas Pasundan**. Serving in this role involves public relations, guiding campus tours, presenting faculty programs, and acting as the official representative for academic promotions.
+                        </p>
+                        <ul class="space-y-2 text-xs font-bold uppercase tracking-wide text-charcoalText/70 font-tech">
+                            <li>✦ Public Relations & Hosting</li>
+                            <li>✦ High School Socialization Roadshows</li>
+                            <li>✦ Official University Marketing Campaigns</li>
+                            <li>✦ Student Ambassador Network</li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Images Grid (8 cols) -->
+                    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <!-- Main Standalone Portrait (Image 4 - 5 cols) -->
+                        <div class="md:col-span-5 border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm">
+                            <img src="public/images/library_4.jpg" alt="Valdric standing as Brand Ambassador sash" class="w-full h-auto object-cover rounded-xl border border-charcoalText/10">
+                            <p class="text-[10px] font-tech text-charcoalText/60 font-bold uppercase mt-3 text-center">
+                                Valdric - Duta Kampus FT Unpas
+                            </p>
+                        </div>
+
+                        <!-- Stacked Right Images (Image 1 & 3 - 7 cols) -->
+                        <div class="md:col-span-7 flex flex-col space-y-6">
+                            <!-- Image 1: Seminar / Presentation -->
+                            <div class="border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm">
+                                <img src="public/images/library_1.jpg" alt="Valdric presenting at high school" class="w-full h-auto object-cover rounded-xl border border-charcoalText/10">
+                                <p class="text-[10px] font-tech text-charcoalText/60 font-bold uppercase mt-3">
+                                    Presentasi program Fakultas Teknik pada kunjungan sekolah
+                                </p>
+                            </div>
+                            
+                            <!-- Image 3: Group auditorium -->
+                            <div class="border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm">
+                                <img src="public/images/library_3.jpg" alt="Valdric group photo with students" class="w-full h-auto object-cover rounded-xl border border-charcoalText/10">
+                                <p class="text-[10px] font-tech text-charcoalText/60 font-bold uppercase mt-3">
+                                    Sosialisasi bersama siswa-siswi SMA Pasundan 2 Bandung
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 2: Staff Kominfo HMTIF -->
+            <div class="space-y-8">
+                <!-- Section Title -->
+                <div class="flex items-center justify-between border-b-2 border-charcoalText pb-4">
+                    <div class="flex items-center space-x-3 font-tech">
+                        <span class="text-xs font-bold text-cobaltBlue">02 /</span>
+                        <h2 class="text-xl md:text-2xl font-extrabold uppercase tracking-tight">Staff Departemen Kominfo</h2>
+                    </div>
+                    <span class="px-3 py-1 bg-creamHighlight text-charcoalText text-[10px] font-bold uppercase tracking-wider rounded-md border border-charcoalText font-tech">HMTIF Unpas</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Left Image (7 cols) -->
+                    <div class="lg:col-span-7 border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm order-last lg:order-first">
+                        <img src="public/images/library_2.jpg" alt="Valdric speaking behind a podium" class="w-full h-auto object-cover rounded-xl border border-charcoalText/10">
+                        <p class="text-[10px] font-tech text-charcoalText/60 font-bold uppercase mt-3 text-center">
+                            Valdric memimpin sesi/berbicara di podium HMTIF Unpas
+                        </p>
+                    </div>
+
+                    <!-- Right Copy (5 cols) -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <h3 class="text-2xl font-extrabold uppercase font-tech leading-tight">Student Governance & Media Communications</h3>
+                        <p class="text-charcoalText/80 text-sm leading-relaxed">
+                            Serving as active staff in the **Departemen Komunikasi dan Informasi (Kominfo) Himpunan Mahasiswa Teknik Informatika (HMTIF)**. This role involves public communications, coordination of digital announcements, media documentation, and public reporting of organization initiatives.
+                        </p>
+                        <ul class="space-y-2 text-xs font-bold uppercase tracking-wide text-charcoalText/70 font-tech">
+                            <li>✦ Himpunan Mahasiswa Teknik Informatika (HMTIF) governance</li>
+                            <li>✦ Management of digital news streams & bulletins</li>
+                            <li>✦ Event documentation & graphic design coordination</li>
+                            <li>✦ Internal & external public relations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 3: Game Designer & Project Manager GGJ 2026 -->
+            <div class="space-y-8">
+                <!-- Section Title -->
+                <div class="flex items-center justify-between border-b-2 border-charcoalText pb-4">
+                    <div class="flex items-center space-x-3 font-tech">
+                        <span class="text-xs font-bold text-cobaltBlue">03 /</span>
+                        <h2 class="text-xl md:text-2xl font-extrabold uppercase tracking-tight">Game Design & Leadership</h2>
+                    </div>
+                    <span class="px-3 py-1 bg-creamHighlight text-charcoalText text-[10px] font-bold uppercase tracking-wider rounded-md border border-charcoalText font-tech">GGJ 2026</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Left Copy (5 cols) -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <h3 class="text-2xl font-extrabold uppercase font-tech leading-tight">Leading Team localhost at Global Game Jam</h3>
+                        <p class="text-charcoalText/80 text-sm leading-relaxed">
+                            Served as the **Game Designer and Project Manager for team "localhost"** at the **Global Game Jam (GGJ) Bandung 2026** (a intensive 48-hour game development hackathon). Tasked with conceptualizing mechanics, detailing production blueprints, and orchestrating programming tasks to deliver a fully functional 2D pixel-art build.
+                        </p>
+                        <ul class="space-y-2 text-xs font-bold uppercase tracking-wide text-charcoalText/70 font-tech">
+                            <li>✦ Game Design Mechanics & System Blueprint</li>
+                            <li>✦ Project management & timeline execution under 48h pressure</li>
+                            <li>✦ Collaborative Unity development and integration</li>
+                            <li>✦ Project submission pitch and deployment</li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Image (7 cols) -->
+                    <div class="lg:col-span-7 border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm">
+                        <img src="public/images/library_5.jpg" alt="Team localhost at Global Game Jam Bandung 2026" class="w-full h-auto object-cover rounded-xl border border-charcoalText/10">
+                        <p class="text-[10px] font-tech text-charcoalText/60 font-bold uppercase mt-3 text-center">
+                            Tim "localhost" di Global Game Jam Bandung 2026 (Valdric paling kanan)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bottom Floating Navigation Dock -->
+    <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bottom-nav-dock px-3 py-2.5 rounded-full flex items-center justify-center space-x-1 border-2 border-charcoalText no-print">
+        <a href="index.html#hero" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Home</a>
+        <a href="index.html#about" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">About</a>
+        <a href="index.html#skills" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
+        <a href="index.html#projects" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Work</a>
+        <a href="cv.html" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">CV</a>
+        <a href="library.html" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech nav-link-active">Library</a>
+        <a href="index.html#contact" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
+    </nav>
+
+    <!-- AI Chatbot Widget HTML Markup -->
+    <div class="ai-chat-widget no-print">
+        <!-- Floating Action Button -->
+        <button class="ai-chat-btn" aria-label="Tanya AI" title="Tanya AI seputar Valdric">
+            <span class="pulse-dot"></span>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.13 2 11.23c0 2.97 1.517 5.617 3.9 7.28l-.9 3.09c-.11.39.26.74.65.72l3.66-1.12c.85.25 1.76.39 2.69.39 5.523 0 10-4.13 10-9.23S17.523 2 12 2zm0 15.5c-.82 0-1.63-.12-2.38-.34a.75.75 0 00-.51.05l-2.07.63.5-1.74a.75.75 0 00-.17-.71C5.87 14.28 5 12.63 5 11.23 5 7.79 8.14 5 12 5s7 2.79 7 6.23-3.14 6.27-7 6.27z"/>
+            </svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div class="ai-chat-window">
+            <!-- Header -->
+            <div class="ai-chat-header">
+                <div class="ai-chat-title-group">
+                    <span class="ai-chat-status"></span>
+                    <span class="ai-chat-title">VAbirama AI Assistant</span>
+                </div>
+                <button class="ai-chat-close" aria-label="Close Chat">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages area -->
+            <div class="ai-chat-messages"></div>
+
+            <!-- Suggested questions -->
+            <div class="ai-chat-suggestions">
+                <button class="suggestion-chip" data-question="Siapa itu Valdric?">Siapa Valdric?</button>
+                <button class="suggestion-chip" data-question="Berapa IPK Valdric saat ini?">Berapa IPK-nya?</button>
+                <button class="suggestion-chip" data-question="Apa saja keahlian teknisnya?">Keahlian Teknis</button>
+                <button class="suggestion-chip" data-question="Bisa ceritakan tentang proyek KasiDuit?">Proyek KasiDuit</button>
+                <button class="suggestion-chip" data-question="Apa rencana magang Valdric?">Rencana Magang</button>
+                <button class="suggestion-chip" data-question="Bagaimana cara menghubungi Valdric?">Hubungi Valdric</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="ai-chat-input-area">
+                <input type="text" class="ai-chat-input" placeholder="Tanya sesuatu..." aria-label="Message Input">
+                <button class="ai-chat-send" aria-label="Send Message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

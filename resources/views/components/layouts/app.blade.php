@@ -59,12 +59,13 @@
 
     <!-- Bottom Floating Navigation Dock -->
     <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bottom-nav-dock px-3 py-2.5 rounded-full flex items-center justify-center space-x-1 border-2 border-charcoalText no-print">
-        <a href="{{ request()->is('cv') ? '/#hero' : '#hero' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Home</a>
-        <a href="{{ request()->is('cv') ? '/#about' : '#about' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">About</a>
-        <a href="{{ request()->is('cv') ? '/#skills' : '#skills' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
-        <a href="{{ request()->is('cv') ? '/#projects' : '#projects' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Work</a>
+        <a href="{{ request()->is('cv') || request()->is('library') ? '/#hero' : '#hero' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Home</a>
+        <a href="{{ request()->is('cv') || request()->is('library') ? '/#about' : '#about' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">About</a>
+        <a href="{{ request()->is('cv') || request()->is('library') ? '/#skills' : '#skills' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
+        <a href="{{ request()->is('cv') || request()->is('library') ? '/#projects' : '#projects' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Work</a>
         <a href="/cv" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech {{ request()->is('cv') ? 'nav-link-active' : '' }}">CV</a>
-        <a href="{{ request()->is('cv') ? '/#contact' : '#contact' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
+        <a href="/library" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech {{ request()->is('library') ? 'nav-link-active' : '' }}">Library</a>
+        <a href="{{ request()->is('cv') || request()->is('library') ? '/#contact' : '#contact' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
     </nav>
 
     <!-- Livewire Scripts -->

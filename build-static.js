@@ -36,7 +36,7 @@ function build() {
   fs.mkdirSync(distDir);
   
   // Copy root static files
-  const filesToCopy = ['index.html', 'cv.html', 'style.css', 'script.js'];
+  const filesToCopy = ['index.html', 'cv.html', 'library.html', 'style.css', 'script.js'];
   filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     if (fs.existsSync(src)) {
