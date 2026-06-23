@@ -962,3 +962,328 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// ==========================================
+// A. INTERACTION CANVAS — Click Burst Particles & Cursor Trail
+// ==========================================
+(function() {
+  const canvas = document.getElementById('interaction-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const particles = [];
+  const trailParticles = [];
+
+  function getThemeColors() {
+    const isDark = document.documentElement.classList.contains('dark');
+    return isDark
+      ? ['#6384ff', '#ff8fb7', '#FAF9F6', '#FAF9F6']
+      : ['#416afc', '#ffa5c6', '#121212', '#416afc'];
+  }
+
+  // --- Click Burst Particle ---
+  class BurstParticle {
+    constructor(x, y) {
+      const colors = getThemeColors();
+      this.x = x;
+      this.y = y;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 4 + 1.5;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed;
+      this.alpha = 1;
+      this.size = Math.random() * 4 + 2;
+      this.type = Math.floor(Math.random() * 3); // 0=dot, 1=plus, 2=square
+      this.gravity = 0.08;
+      this.life = 1;
+      this.decay = Math.random() * 0.025 + 0.015;
+    }
+    update() {
+      this.vy += this.gravity;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vx *= 0.97;
+      this.life -= this.decay;
+      this.alpha = Math.max(0, this.life);
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 1.5;
+      if (this.type === 0) {
+        // Dot
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.type === 1) {
+        // Plus
+        const s = this.size * 1.5;
+        ctx.beginPath();
+        ctx.moveTo(this.x - s, this.y); ctx.lineTo(this.x + s, this.y);
+        ctx.moveTo(this.x, this.y - s); ctx.lineTo(this.x, this.y + s);
+        ctx.stroke();
+      } else {
+        // Square
+        ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+      }
+      ctx.restore();
+    }
+    get dead() { return this.life <= 0; }
+  }
+
+  // --- Cursor Trail Particle ---
+  class TrailParticle {
+    constructor(x, y) {
+      const colors = getThemeColors();
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 2.5 + 0.5;
+      this.alpha = Math.random() * 0.5 + 0.3;
+      this.color = colors[Math.floor(Math.random() * 2)]; // only accent colors
+      this.life = 1;
+      this.decay = Math.random() * 0.06 + 0.04;
+    }
+    update() {
+      this.life -= this.decay;
+      this.alpha = Math.max(0, this.life * 0.6);
+      this.size *= 0.93;
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+    get dead() { return this.life <= 0 || this.size < 0.2; }
+  }
+
+  // Click Burst Trigger
+  document.addEventListener('click', (e) => {
+    // Don't burst on buttons/links to avoid visual confusion with interactions
+    const tag = e.target.tagName;
+    const count = 16;
+    for (let i = 0; i < count; i++) {
+      particles.push(new BurstParticle(e.clientX, e.clientY));
+    }
+  });
+
+  // Cursor Trail
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (Math.random() > 0.4) {
+      trailParticles.push(new TrailParticle(mouseX, mouseY));
+    }
+  });
+
+  // Render loop
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update + draw trail
+    for (let i = trailParticles.length - 1; i >= 0; i--) {
+      trailParticles[i].update();
+      trailParticles[i].draw();
+      if (trailParticles[i].dead) trailParticles.splice(i, 1);
+    }
+
+    // Update + draw burst
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw();
+      if (particles[i].dead) particles.splice(i, 1);
+    }
+
+    requestAnimationFrame(render);
+  }
+  render();
+})();
+
+
+// ==========================================
+// B. MAGNETIC BUTTON EFFECT
+// ==========================================
+(function() {
+  const magnetTargets = document.querySelectorAll('a[href="#projects"], a[href="#contact"], a[href="cv.html"], a[href="/cv"], #theme-toggle-btn');
+
+  magnetTargets.forEach(el => {
+    el.classList.add('magnetic-effect');
+
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (e.clientX - centerX) * 0.3;
+      const deltaY = (e.clientY - centerY) * 0.3;
+      el.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'translate(0px, 0px)';
+    });
+  });
+})();
+
+
+// ==========================================
+// C. 3D TILT CARD PARALLAX EFFECT
+// ==========================================
+(function() {
+  function applyTilt() {
+    const cards = document.querySelectorAll('.carousel-slide, .lib-card, .border-2.border-charcoalText.p-8.rounded-2xl');
+    cards.forEach(card => {
+      if (card.classList.contains('tilt-attached')) return;
+      card.classList.add('tilt-card', 'tilt-attached');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.boxShadow = `${-rotateY * 1.5}px ${rotateX * 1.5}px 30px rgba(65,106,252,0.18)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.boxShadow = '';
+      });
+    });
+  }
+
+  // Initial attach
+  applyTilt();
+  // Re-attach for dynamically injected content
+  const tiltObserver = new MutationObserver(() => applyTilt());
+  tiltObserver.observe(document.body, { childList: true, subtree: true });
+})();
+
+
+// ==========================================
+// D. CYBER TEXT SCRAMBLE EFFECT
+// ==========================================
+(function() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+
+  function scramble(el, finalText, duration = 900) {
+    let frame = 0;
+    const totalFrames = Math.ceil(duration / 16);
+    let rafId;
+    const original = finalText || el.textContent;
+
+    function tick() {
+      frame++;
+      const progress = frame / totalFrames;
+      let output = '';
+      for (let i = 0; i < original.length; i++) {
+        if (original[i] === ' ') { output += ' '; continue; }
+        if (i / original.length < progress) {
+          output += original[i];
+        } else {
+          output += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      el.textContent = output;
+      if (frame < totalFrames) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        el.textContent = original;
+      }
+    }
+    cancelAnimationFrame(rafId);
+    tick();
+  }
+
+  // Apply to hero h1 spans on hover
+  const heroSpans = document.querySelectorAll('.hero-slide-up');
+  heroSpans.forEach(span => {
+    const orig = span.textContent.trim();
+    span.style.cursor = 'default';
+    span.addEventListener('mouseenter', () => {
+      scramble(span, orig, 700);
+    });
+  });
+
+  // Apply to section headings h2 on hover
+  const headings = document.querySelectorAll('h2');
+  headings.forEach(h => {
+    const orig = h.textContent.trim();
+    h.addEventListener('mouseenter', () => {
+      scramble(h, orig, 600);
+    });
+  });
+
+  // Preloader reveal scramble — fire when preloader hides
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    const observer = new MutationObserver(() => {
+      if (preloader.classList.contains('preloader-hidden')) {
+        setTimeout(() => {
+          heroSpans.forEach((span, i) => {
+            setTimeout(() => scramble(span, span.textContent.trim(), 800), i * 180);
+          });
+        }, 400);
+        observer.disconnect();
+      }
+    });
+    observer.observe(preloader, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+
+
+// ==========================================
+// E. SKILL SHIMMER & STAGGER SCROLL REVEAL
+// ==========================================
+(function() {
+  // Apply skill-shimmer to all ✦ list items in skill cards
+  document.querySelectorAll('li').forEach(li => {
+    if (li.textContent.trim().startsWith('✦')) {
+      li.classList.add('skill-shimmer');
+      li.style.cursor = 'default';
+      li.style.transition = 'color 0.3s ease';
+    }
+  });
+
+  // Staggered scroll-reveal with variable delay for sections
+  const staggerParents = document.querySelectorAll('.grid');
+  staggerParents.forEach(grid => {
+    const children = grid.querySelectorAll(':scope > div, :scope > article, :scope > a');
+    children.forEach((child, i) => {
+      if (!child.classList.contains('scroll-reveal')) {
+        child.classList.add('scroll-reveal');
+      }
+      child.style.transitionDelay = `${i * 80}ms`;
+    });
+  });
+
+  // Re-run intersection observer to pick up staggered items
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => io.observe(el));
+})();
+
+
+

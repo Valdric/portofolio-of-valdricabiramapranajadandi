@@ -29,6 +29,9 @@
     <!-- Custom Cursor (Desktop Only) -->
     <div id="custom-cursor" class="hidden md:block"></div>
     <div id="custom-cursor-dot" class="hidden md:block"></div>
+    
+    <!-- Interaction Canvas Overlay for Particle Effects -->
+    <canvas id="interaction-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-[9999]"></canvas>
 
     <!-- Preloader Intro Overlay -->
     <div id="preloader" class="fixed inset-0 w-full h-full bg-[#121212] text-creamBg dark:text-charcoalText z-50 flex flex-col justify-between p-8 md:p-16">
@@ -617,5 +620,253 @@
             </div>
         </div>
     </div>
+
+    <!-- ==========================================
+         PREMIUM ANIMATION SYSTEMS
+         ========================================== -->
+    <script>
+    // A. INTERACTION CANVAS — Click Burst Particles & Cursor Trail
+    (function() {
+        const canvas = document.getElementById('interaction-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const trailParticles = [];
+
+        function getThemeColors() {
+            const isDark = document.documentElement.classList.contains('dark');
+            return isDark
+                ? ['#6384ff', '#ff8fb7', '#FAF9F6', '#FAF9F6']
+                : ['#416afc', '#ffa5c6', '#121212', '#416afc'];
+        }
+
+        class BurstParticle {
+            constructor(x, y) {
+                const colors = getThemeColors();
+                this.x = x; this.y = y;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 1.5;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.size = Math.random() * 4 + 2;
+                this.type = Math.floor(Math.random() * 3);
+                this.gravity = 0.08;
+                this.life = 1;
+                this.decay = Math.random() * 0.025 + 0.015;
+            }
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx; this.y += this.vy;
+                this.vx *= 0.97;
+                this.life -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fillStyle = this.color;
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1.5;
+                if (this.type === 0) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                } else if (this.type === 1) {
+                    const s = this.size * 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x - s, this.y); ctx.lineTo(this.x + s, this.y);
+                    ctx.moveTo(this.x, this.y - s); ctx.lineTo(this.x, this.y + s);
+                    ctx.stroke();
+                } else {
+                    ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+                }
+                ctx.restore();
+            }
+            get dead() { return this.life <= 0; }
+        }
+
+        class TrailParticle {
+            constructor(x, y) {
+                const colors = getThemeColors();
+                this.x = x; this.y = y;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.color = colors[Math.floor(Math.random() * 2)];
+                this.life = 1;
+                this.decay = Math.random() * 0.06 + 0.04;
+            }
+            update() {
+                this.life -= this.decay;
+                this.size *= 0.93;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life * 0.6);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+            get dead() { return this.life <= 0 || this.size < 0.2; }
+        }
+
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 16; i++) particles.push(new BurstParticle(e.clientX, e.clientY));
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.4) trailParticles.push(new TrailParticle(e.clientX, e.clientY));
+        });
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = trailParticles.length - 1; i >= 0; i--) {
+                trailParticles[i].update(); trailParticles[i].draw();
+                if (trailParticles[i].dead) trailParticles.splice(i, 1);
+            }
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update(); particles[i].draw();
+                if (particles[i].dead) particles.splice(i, 1);
+            }
+            requestAnimationFrame(render);
+        }
+        render();
+    })();
+
+    // B. MAGNETIC BUTTON EFFECT
+    (function() {
+        const magnetTargets = document.querySelectorAll('a[href="#projects"], a[href="#contact"], a[href="/cv"], #theme-toggle-btn');
+        magnetTargets.forEach(el => {
+            el.classList.add('magnetic-effect');
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const deltaX = (e.clientX - rect.left - rect.width / 2) * 0.3;
+                const deltaY = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                el.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    })();
+
+    // C. 3D TILT CARD PARALLAX EFFECT
+    (function() {
+        function applyTilt() {
+            const cards = document.querySelectorAll('.carousel-slide, .lib-card, .border-2.border-charcoalText.p-8.rounded-2xl');
+            cards.forEach(card => {
+                if (card.classList.contains('tilt-attached')) return;
+                card.classList.add('tilt-card', 'tilt-attached');
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -8;
+                    const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 8;
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`;
+                    card.style.boxShadow = `${-rotateY * 1.5}px ${rotateX * 1.5}px 30px rgba(65,106,252,0.18)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+                    card.style.boxShadow = '';
+                });
+            });
+        }
+        applyTilt();
+        new MutationObserver(applyTilt).observe(document.body, { childList: true, subtree: true });
+    })();
+
+    // D. CYBER TEXT SCRAMBLE EFFECT
+    (function() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+
+        function scramble(el, finalText, duration = 900) {
+            const original = finalText || el.textContent;
+            const totalFrames = Math.ceil(duration / 16);
+            let frame = 0, rafId;
+            function tick() {
+                frame++;
+                const progress = frame / totalFrames;
+                let out = '';
+                for (let i = 0; i < original.length; i++) {
+                    if (original[i] === ' ') { out += ' '; continue; }
+                    out += i / original.length < progress
+                        ? original[i]
+                        : chars[Math.floor(Math.random() * chars.length)];
+                }
+                el.textContent = out;
+                if (frame < totalFrames) rafId = requestAnimationFrame(tick);
+                else el.textContent = original;
+            }
+            cancelAnimationFrame(rafId);
+            tick();
+        }
+
+        document.querySelectorAll('.hero-slide-up').forEach(span => {
+            const orig = span.textContent.trim();
+            span.addEventListener('mouseenter', () => scramble(span, orig, 700));
+        });
+
+        document.querySelectorAll('h2').forEach(h => {
+            const orig = h.textContent.trim();
+            h.addEventListener('mouseenter', () => scramble(h, orig, 600));
+        });
+
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            const heroSpans = document.querySelectorAll('.hero-slide-up');
+            const obs = new MutationObserver(() => {
+                if (preloader.classList.contains('preloader-hidden')) {
+                    setTimeout(() => {
+                        heroSpans.forEach((span, i) =>
+                            setTimeout(() => scramble(span, span.textContent.trim(), 800), i * 180)
+                        );
+                    }, 400);
+                    obs.disconnect();
+                }
+            });
+            obs.observe(preloader, { attributes: true, attributeFilter: ['class'] });
+        }
+    })();
+
+    // E. SKILL SHIMMER & STAGGER SCROLL REVEAL
+    (function() {
+        document.querySelectorAll('li').forEach(li => {
+            if (li.textContent.trim().startsWith('✦')) {
+                li.classList.add('skill-shimmer');
+                li.style.cursor = 'default';
+                li.style.transition = 'color 0.3s ease';
+            }
+        });
+
+        const staggerParents = document.querySelectorAll('.grid');
+        staggerParents.forEach(grid => {
+            const children = grid.querySelectorAll(':scope > div, :scope > article, :scope > a');
+            children.forEach((child, i) => {
+                if (!child.classList.contains('scroll-reveal')) child.classList.add('scroll-reveal');
+                child.style.transitionDelay = `${i * 80}ms`;
+            });
+        });
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => io.observe(el));
+    })();
+    </script>
 </body>
 </html>
+
+
