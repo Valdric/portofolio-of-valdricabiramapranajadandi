@@ -894,6 +894,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxPoints = document.getElementById('lightbox-points');
   const lightboxIndex = document.getElementById('lightbox-index-badge');
   const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+  const lightboxLinkContainer = document.getElementById('lightbox-link-container');
+  const lightboxLink = document.getElementById('lightbox-link');
 
   if (libCards.length > 0 && libLightbox) {
     libCards.forEach(card => {
@@ -905,6 +907,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = card.getAttribute('data-lib-desc');
         const index = card.getAttribute('data-lib-index');
         const pointsAttr = card.getAttribute('data-lib-points') || '';
+        const link = card.getAttribute('data-lib-link');
+        const linkText = card.getAttribute('data-lib-link-text') || 'Watch Demo ↗';
         
         // Set attributes
         lightboxImg.src = img;
@@ -913,7 +917,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxTitle.textContent = title;
         lightboxRole.textContent = role;
         lightboxDesc.textContent = desc;
-        lightboxIndex.textContent = `${index.padStart(2, '0')} / 06`;
+        lightboxIndex.textContent = `${index.padStart(2, '0')} / 07`;
 
         // Render bullet points
         lightboxPoints.innerHTML = '';
@@ -924,6 +928,15 @@ document.addEventListener('DOMContentLoaded', () => {
             li.textContent = `✦ ${pt.trim()}`;
             lightboxPoints.appendChild(li);
           });
+        }
+
+        // Render Link
+        if (link) {
+          lightboxLink.href = link;
+          lightboxLink.textContent = linkText;
+          lightboxLinkContainer.classList.remove('hidden');
+        } else {
+          lightboxLinkContainer.classList.add('hidden');
         }
 
         // Open modal

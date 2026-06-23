@@ -340,7 +340,7 @@
                     <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter">Library of Valdric</h2>
                 </div>
                 <div class="font-tech text-right text-xs text-charcoalText/50 uppercase tracking-widest hidden md:block">
-                    <span>Index: 06 Milestones</span>
+                    <span>Index: 07 Milestones</span>
                 </div>
             </div>
 
@@ -480,6 +480,27 @@
                     </div>
                 </div>
 
+                <!-- Item 7: Gameseed (Game Jam Entry) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="ggj"
+                     data-lib-index="7"
+                     data-lib-title="Gameseed Ecological Jam"
+                     data-lib-role="Game Programmer & Developer"
+                     data-lib-org="Gameseed 2026"
+                     data-lib-img="/images/gameseed.png"
+                     data-lib-desc="Developed an interactive retro-themed ecological awareness simulation game for the Gameseed 2026 competition. Designed to inspire conservation through gameplay mechanics."
+                     data-lib-points="Ecological Awareness Concept Integration;2D Grid Seed Planting Mechanics;Energy & Resource Management Systems;YouTube Video Gameplay Showcase"
+                     data-lib-link="https://youtu.be/yJB7bejT50E"
+                     data-lib-link-text="Watch Demo ↗">
+                    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/gameseed.png" alt="Gameseed ecological game" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Game Jam Entry ]</span>
+                        <span class="text-cobaltBlue">Gameseed 2026</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -531,12 +552,19 @@
                             <!-- List elements -->
                         </ul>
                     </div>
+
+                    <!-- Optional External Link -->
+                    <div id="lightbox-link-container" class="pt-4 hidden">
+                        <a id="lightbox-link" href="" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 bg-cobaltBlue hover:bg-charcoalText text-creamBg font-bold text-xs uppercase tracking-wider rounded-full transition-all duration-300 font-tech">
+                            Watch Demo ↗
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Footer details status -->
                 <div class="pt-6 mt-6 border-t border-charcoalText/10 flex justify-between items-center text-[9px] font-bold uppercase font-tech text-charcoalText/50">
                     <span>Repository Record</span>
-                    <span id="lightbox-index-badge">01/06</span>
+                    <span id="lightbox-index-badge">01/07</span>
                 </div>
             </div>
         </div>
@@ -970,6 +998,8 @@
             const lightboxPoints = document.getElementById('lightbox-points');
             const lightboxIndex = document.getElementById('lightbox-index-badge');
             const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+            const lightboxLinkContainer = document.getElementById('lightbox-link-container');
+            const lightboxLink = document.getElementById('lightbox-link');
 
             if (libCards.length > 0 && libLightbox) {
                 libCards.forEach(card => {
@@ -981,6 +1011,8 @@
                         const desc = card.getAttribute('data-lib-desc');
                         const index = card.getAttribute('data-lib-index');
                         const pointsAttr = card.getAttribute('data-lib-points') || '';
+                        const link = card.getAttribute('data-lib-link');
+                        const linkText = card.getAttribute('data-lib-link-text') || 'Watch Demo ↗';
                         
                         // Set attributes
                         lightboxImg.src = img;
@@ -989,7 +1021,7 @@
                         lightboxTitle.textContent = title;
                         lightboxRole.textContent = role;
                         lightboxDesc.textContent = desc;
-                        lightboxIndex.textContent = `${index.padStart(2, '0')} / 06`;
+                        lightboxIndex.textContent = `${index.padStart(2, '0')} / 07`;
 
                         // Render bullet points
                         lightboxPoints.innerHTML = '';
@@ -1000,6 +1032,15 @@
                                 li.textContent = `✦ ${pt.trim()}`;
                                 lightboxPoints.appendChild(li);
                             });
+                        }
+
+                        // Render Link
+                        if (link) {
+                            lightboxLink.href = link;
+                            lightboxLink.textContent = linkText;
+                            lightboxLinkContainer.classList.remove('hidden');
+                        } else {
+                            lightboxLinkContainer.classList.add('hidden');
                         }
 
                         // Open modal
