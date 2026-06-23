@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Valdric Abirama Pranaja Dandi | Portfolio</title>
     
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Valdric Abirama Pranaja Dandi | Portfolio - Informatics Engineering, Web & Game Developer.">
     <meta name="keywords" content="Valdric Abirama Pranaja Dandi, Portfolio, Informatics Engineering, Developer, Game Dev, Flutter, Unity, Poch Studio Style">
@@ -309,7 +312,308 @@
 
             window.addEventListener('scroll', scrollSpy);
             scrollSpy();
+
+            // ==========================================
+            // 8. AI ASSISTANT CHATBOT LOGIC
+            // ==========================================
+            const chatWidget = document.querySelector('.ai-chat-widget');
+            const chatBtn = document.querySelector('.ai-chat-btn');
+            const chatWindow = document.querySelector('.ai-chat-window');
+            const chatClose = document.querySelector('.ai-chat-close');
+            const chatMessages = document.querySelector('.ai-chat-messages');
+            const chatInput = document.querySelector('.ai-chat-input');
+            const chatSend = document.querySelector('.ai-chat-send');
+            const suggestionChips = document.querySelectorAll('.suggestion-chip');
+            const pulseDot = document.querySelector('.pulse-dot');
+
+            if (chatWidget && chatBtn && chatWindow && chatClose) {
+                let isChatOpen = false;
+                let hasWelcomed = false;
+
+                // Toggle Chat Window
+                chatBtn.addEventListener('click', () => {
+                    isChatOpen = !isChatOpen;
+                    if (isChatOpen) {
+                        chatWindow.classList.add('open');
+                        if (pulseDot) pulseDot.style.display = 'none';
+                        if (!hasWelcomed) {
+                            sendWelcomeMessage();
+                            hasWelcomed = true;
+                        }
+                        setTimeout(() => chatInput.focus(), 300);
+                    } else {
+                        chatWindow.classList.remove('open');
+                    }
+                });
+
+                chatClose.addEventListener('click', () => {
+                    isChatOpen = false;
+                    chatWindow.classList.remove('open');
+                });
+
+                // Send Message Event
+                chatSend.addEventListener('click', handleUserSend);
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        handleUserSend();
+                    }
+                });
+
+                // Suggestion Chips Click
+                suggestionChips.forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const text = chip.getAttribute('data-question') || chip.textContent;
+                        addUserMessage(text);
+                        getAIResponse(text);
+                    });
+                });
+
+                function handleUserSend() {
+                    const text = chatInput.value.trim();
+                    if (!text) return;
+                    addUserMessage(text);
+                    chatInput.value = '';
+                    getAIResponse(text);
+                }
+
+                function addUserMessage(text) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'chat-msg user';
+                    msgDiv.textContent = text;
+                    chatMessages.appendChild(msgDiv);
+                    scrollToBottom();
+                }
+
+                function addBotMessage(text) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'chat-msg bot';
+                    msgDiv.innerHTML = formatMarkdown(text);
+                    chatMessages.appendChild(msgDiv);
+                    scrollToBottom();
+
+                    // Bind cursor hover event to newly generated links in the bot message
+                    const links = msgDiv.querySelectorAll('a');
+                    const cursor = document.getElementById('custom-cursor');
+                    if (cursor) {
+                        links.forEach(link => {
+                            link.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                            link.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+                        });
+                    }
+                }
+
+                function sendWelcomeMessage() {
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        addBotMessage("Halo! Saya adalah **VAbirama AI**, asisten virtual Valdric. Ada yang bisa saya bantu seputar profil, proyek, atau rencana magang Valdric?");
+                    }, 800);
+                }
+
+                function showTypingIndicator() {
+                    const typingDiv = document.createElement('div');
+                    typingDiv.className = 'chat-msg bot typing-indicator-wrapper';
+                    typingDiv.innerHTML = `
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    `;
+                    chatMessages.appendChild(typingDiv);
+                    scrollToBottom();
+                }
+
+                function removeTypingIndicator() {
+                    const indicator = chatMessages.querySelector('.typing-indicator-wrapper');
+                    if (indicator) {
+                        indicator.remove();
+                    }
+                }
+
+                function scrollToBottom() {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+
+                function formatMarkdown(text) {
+                    let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color: var(--color-accent-blue); text-decoration: underline; font-weight: bold;">$1</a>');
+                    
+                    const lines = html.split('\n');
+                    let inList = false;
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith('- ') || line.startsWith('* ')) {
+                            const content = line.substring(2);
+                            if (!inList) {
+                                lines[i] = '<ul style="list-style-type: disc; margin-left: 16px; margin-top: 4px; margin-bottom: 4px;"><li>' + content + '</li>';
+                                inList = true;
+                            } else {
+                                lines[i] = '<li>' + content + '</li>';
+                            }
+                        } else {
+                            if (inList) {
+                                lines[i - 1] += '</ul>';
+                                inList = false;
+                            }
+                            if (line !== '') {
+                                lines[i] = '<p style="margin-bottom: 6px;">' + lines[i] + '</p>';
+                            }
+                        }
+                    }
+                    if (inList) {
+                        lines[lines.length - 1] += '</ul>';
+                    }
+                    return lines.join('\n');
+                }
+
+                function getAIResponse(userMessage) {
+                    showTypingIndicator();
+
+                    fetch('/api/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                        },
+                        body: JSON.stringify({ message: userMessage })
+                    })
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error('API failed');
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        removeTypingIndicator();
+                        if (data.status === 'success' && data.reply) {
+                            addBotMessage(data.reply);
+                        } else {
+                            handleFallbackResponse(userMessage);
+                        }
+                    })
+                    .catch(err => {
+                        removeTypingIndicator();
+                        handleFallbackResponse(userMessage);
+                    });
+                }
+
+                const localDatabase = [
+                    {
+                        keywords: ['siapa', 'profil', 'bio', 'tentang', 'about', 'who', 'nama', 'valdric', 'vabirama'],
+                        response: "Valdric Abirama Pranaja Dandi adalah mahasiswa S1 Teknik Informatika di **Universitas Pasundan (UNPAS) Bandung** (Angkatan 2023). Ia berfokus pada pengembangan web full-stack (menggunakan Laravel, Livewire) dan mobile application (menggunakan Flutter), serta aktif membuat game 2D."
+                    },
+                    {
+                        keywords: ['ipk', 'gpa', 'nilai', 'score', 'akademik'],
+                        response: "IPK (GPA) Valdric saat ini adalah **3.55 / 4.00** (skala 4.00), yang mencerminkan komitmen akademisnya yang kuat di bidang Teknik Informatika UNPAS."
+                    },
+                    {
+                        keywords: ['kuliah', 'jurusan', 'kampus', 'unpas', 'universitas', 'study', 'education', 'sekolah', 'nrp', 'nim'],
+                        response: "Valdric berkuliah di **Universitas Pasundan (UNPAS) Bandung**, mengambil Program Studi S1 Teknik Informatika. NRP-nya adalah **233040163**."
+                    },
+                    {
+                        keywords: ['skill', 'keahlian', 'tech', 'stack', 'pemrograman', 'bahasa', 'technologies', 'tools', 'bisa apa'],
+                        response: "Keahlian teknis Valdric meliputi:\n- **Programming Languages**: HTML, CSS, JavaScript, PHP, SQL, Dart, C# (Unity)\n- **Frontend/Backend**: Tailwind CSS, Livewire, Alpine.js, Vite, Laravel, SQLite, MySQL\n- **Mobile & Game**: Flutter, Unity 2D\n- **Tools**: Git, VS Code"
+                    },
+                    {
+                        keywords: ['kasiduit', 'crowdfunding', 'donasi', 'kampanye', 'sosial'],
+                        response: "**KasiDuit** adalah salah satu proyek featured work Valdric. Ini adalah platform crowdfunding & donasi berbasis web yang dibuat dengan **Laravel, SQLite, dan Tailwind CSS**. Platform ini mendukung pembuatan kampanye, manajemen donasi, dashboard tracking, dan transparansi keuangan publik. [Kunjungi Kasiduit](https://kasiduit.my.id/)"
+                    },
+                    {
+                        keywords: ['gosir', 'kasir', 'pos', 'cashier', 'flutter', 'dart'],
+                        response: "**Gosir (Cashier App)** adalah aplikasi POS (Point of Sale) mobile yang dikembangkan menggunakan **Flutter & Dart**. Aplikasi ini memiliki sistem enkripsi data lokal SQL terstruktur, barcode scanner simulasi, ekspor struk transaksi PDF, dan visualisasi grafik inventaris secara real-time."
+                    },
+                    {
+                        keywords: ['magang', 'bjb', 'naripan', 'kantor', 'internship', 'tujuan'],
+                        response: "Valdric memiliki minat besar untuk magang di **PT. Bank BJB Kantor Cabang Utama Bandung (Jalan Naripan)**. Ia menargetkan posisi IT Developer (Mobile Flutter/Backend Laravel) atau Quality Assurance (QA) untuk mengaplikasikan keahlian teknisnya dalam proyek perbankan nyata."
+                    },
+                    {
+                        keywords: ['kontak', 'hubungi', 'email', 'github', 'contact', 'sosmed', 'social'],
+                        response: "Anda dapat menghubungi Valdric melalui saluran berikut:\n- **Email**: valdricapd@gmail.com\n- **GitHub**: [github.com/Valdric](https://github.com/Valdric)\n- **Lokasi**: Bandung, Indonesia"
+                    }
+                ];
+
+                function handleFallbackResponse(message) {
+                    const lowerMsg = message.toLowerCase();
+                    let bestMatch = null;
+                    let maxMatches = 0;
+
+                    localDatabase.forEach(item => {
+                        let matches = 0;
+                        item.keywords.forEach(keyword => {
+                            if (lowerMsg.includes(keyword)) {
+                                matches++;
+                            }
+                        });
+                        if (matches > maxMatches) {
+                            maxMatches = matches;
+                            bestMatch = item;
+                        }
+                    });
+
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        if (bestMatch && maxMatches > 0) {
+                            addBotMessage(bestMatch.response);
+                        } else {
+                            addBotMessage("Saya mengerti. Namun, sebagai asisten virtual Valdric, lingkup informasi saya berfokus pada:\n- Profil, IPK (**3.55**), dan pendidikan Valdric di UNPAS\n- Keahlian teknis & Tech Stack\n- Detail proyek unggulan (**KasiDuit**, **Gosir**)\n- Minat magang di PT. Bank BJB Kantor Cabang Utama Bandung (Jalan Naripan)\n- Cara menghubungi Valdric\n\nSilakan ajukan pertanyaan seputar topik-topik di atas!");
+                        }
+                    }, 500);
+                }
+            }
         });
     </script>
+
+    <!-- AI Chatbot Widget HTML Markup -->
+    <div class="ai-chat-widget no-print">
+        <!-- Floating Action Button -->
+        <button class="ai-chat-btn" aria-label="Tanya AI" title="Tanya AI seputar Valdric">
+            <span class="pulse-dot"></span>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.13 2 11.23c0 2.97 1.517 5.617 3.9 7.28l-.9 3.09c-.11.39.26.74.65.62l3.66-1.12c.85.25 1.76.39 2.69.39 5.523 0 10-4.13 10-9.23S17.523 2 12 2zm0 15.5c-.82 0-1.63-.12-2.38-.34a.75.75 0 00-.51.05l-2.07.63.5-1.74a.75.75 0 00-.17-.71C5.87 14.28 5 12.63 5 11.23 5 7.79 8.14 5 12 5s7 2.79 7 6.23-3.14 6.27-7 6.27z"/>
+            </svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div class="ai-chat-window">
+            <!-- Header -->
+            <div class="ai-chat-header">
+                <div class="ai-chat-title-group">
+                    <span class="ai-chat-status"></span>
+                    <span class="ai-chat-title">VAbirama AI Assistant</span>
+                </div>
+                <button class="ai-chat-close" aria-label="Close Chat">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages area -->
+            <div class="ai-chat-messages"></div>
+
+            <!-- Suggested questions -->
+            <div class="ai-chat-suggestions">
+                <button class="suggestion-chip" data-question="Siapa itu Valdric?">Siapa Valdric?</button>
+                <button class="suggestion-chip" data-question="Berapa IPK Valdric saat ini?">Berapa IPK-nya?</button>
+                <button class="suggestion-chip" data-question="Apa saja keahlian teknisnya?">Keahlian Teknis</button>
+                <button class="suggestion-chip" data-question="Bisa ceritakan tentang proyek KasiDuit?">Proyek KasiDuit</button>
+                <button class="suggestion-chip" data-question="Apa rencana magang Valdric?">Rencana Magang</button>
+                <button class="suggestion-chip" data-question="Bagaimana cara menghubungi Valdric?">Hubungi Valdric</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="ai-chat-input-area">
+                <input type="text" class="ai-chat-input" placeholder="Tanya sesuatu..." aria-label="Message Input">
+                <button class="ai-chat-send" aria-label="Send Message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

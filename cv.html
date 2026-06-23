@@ -594,5 +594,54 @@
             }
         });
     </script>
+    <!-- AI Chatbot Widget -->
+    <div class="ai-chat-widget no-print">
+        <!-- Floating Action Button -->
+        <button class="ai-chat-btn" aria-label="Tanya AI" title="Tanya AI seputar Valdric">
+            <span class="pulse-dot"></span>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.13 2 11.23c0 2.97 1.517 5.617 3.9 7.28l-.9 3.09c-.11.39.26.74.65.72l3.66-1.12c.85.25 1.76.39 2.69.39 5.523 0 10-4.13 10-9.23S17.523 2 12 2zm0 15.5c-.82 0-1.63-.12-2.38-.34a.75.75 0 00-.51.05l-2.07.63.5-1.74a.75.75 0 00-.17-.71C5.87 14.28 5 12.63 5 11.23 5 7.79 8.14 5 12 5s7 2.79 7 6.23-3.14 6.27-7 6.27z"/>
+            </svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div class="ai-chat-window">
+            <!-- Header -->
+            <div class="ai-chat-header">
+                <div class="ai-chat-title-group">
+                    <span class="ai-chat-status"></span>
+                    <span class="ai-chat-title">VAbirama AI Assistant</span>
+                </div>
+                <button class="ai-chat-close" aria-label="Close Chat">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages area -->
+            <div class="ai-chat-messages"></div>
+
+            <!-- Suggested questions -->
+            <div class="ai-chat-suggestions">
+                <button class="suggestion-chip" data-question="Siapa itu Valdric?">Siapa Valdric?</button>
+                <button class="suggestion-chip" data-question="Berapa IPK Valdric saat ini?">Berapa IPK-nya?</button>
+                <button class="suggestion-chip" data-question="Apa saja keahlian teknisnya?">Keahlian Teknis</button>
+                <button class="suggestion-chip" data-question="Bisa ceritakan tentang proyek KasiDuit?">Proyek KasiDuit</button>
+                <button class="suggestion-chip" data-question="Apa rencana magang Valdric?">Rencana Magang</button>
+                <button class="suggestion-chip" data-question="Bagaimana cara menghubungi Valdric?">Hubungi Valdric</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="ai-chat-input-area">
+                <input type="text" class="ai-chat-input" placeholder="Tanya sesuatu..." aria-label="Message Input">
+                <button class="ai-chat-send" aria-label="Send Message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
