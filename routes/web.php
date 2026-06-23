@@ -13,9 +13,6 @@ Route::get('/cv', function () {
     return view('cv', compact('projects'));
 });
 
-Route::get('/library', function () {
-    return view('library');
-});
-
 Route::post('/api/chat', [ChatController::class, 'chat']);
+
 

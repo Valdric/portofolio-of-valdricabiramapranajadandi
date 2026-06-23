@@ -316,11 +316,224 @@
         </div>
     </section>
 
+    <!-- LIBRARY SECTION (Interactive Grid with Lightbox) -->
+    <section id="library" class="py-24 px-6 md:px-12 border-b-2 border-charcoalText scroll-reveal relative z-10 bg-creamBg">
+        <div class="max-w-7xl mx-auto space-y-16">
+            
+            <!-- Section Title -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+                <div class="flex items-center space-x-3 font-tech">
+                    <span class="text-sm font-bold text-cobaltBlue">04 /</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter">Library of Valdric</h2>
+                </div>
+                <div class="font-tech text-right text-xs text-charcoalText/50 uppercase tracking-widest hidden md:block">
+                    <span>Index: 06 Milestones</span>
+                </div>
+            </div>
+
+            <!-- Library Filter Controls -->
+            <div class="flex flex-wrap gap-3 font-tech text-xs font-bold uppercase tracking-wider z-20 relative">
+                <button data-lib-filter="all" class="lib-filter-btn px-5 py-2.5 border-2 border-charcoalText bg-charcoalText text-creamBg rounded-full transition-all duration-300">
+                    [ All Highlights ]
+                </button>
+                <button data-lib-filter="ba" class="lib-filter-btn px-5 py-2.5 border-2 border-charcoalText bg-creamBg hover:bg-charcoalText hover:text-creamBg text-charcoalText rounded-full transition-all duration-300">
+                    [ Brand Ambassador ]
+                </button>
+                <button data-lib-filter="hmtif" class="lib-filter-btn px-5 py-2.5 border-2 border-charcoalText bg-creamBg hover:bg-charcoalText hover:text-creamBg text-charcoalText rounded-full transition-all duration-300">
+                    [ Staff HMTIF ]
+                </button>
+                <button data-lib-filter="gdgoc" class="lib-filter-btn px-5 py-2.5 border-2 border-charcoalText bg-creamBg hover:bg-charcoalText hover:text-creamBg text-charcoalText rounded-full transition-all duration-300">
+                    [ Head GDGOC ]
+                </button>
+                <button data-lib-filter="ggj" class="lib-filter-btn px-5 py-2.5 border-2 border-charcoalText bg-creamBg hover:bg-charcoalText hover:text-creamBg text-charcoalText rounded-full transition-all duration-300">
+                    [ Game Jam ]
+                </button>
+            </div>
+
+            <!-- Library Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+                
+                <!-- Item 1: library_4 (Sash Portrait) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="ba"
+                     data-lib-index="1"
+                     data-lib-title="Brand Ambassador FT Unpas"
+                     data-lib-role="Valdric as Brand Ambassador (Duta Kampus)"
+                     data-lib-org="Fakultas Teknik Unpas"
+                     data-lib-img="/images/library_4.jpg"
+                     data-lib-desc="Selected as the Brand Ambassador of the Faculty of Engineering, Universitas Pasundan. Serving in this role involves public relations, guiding campus tours, presenting faculty programs, and acting as the official representative for academic promotions."
+                     data-lib-points="Public Relations & Hosting;High School Socialization Roadshows;Official University Marketing Campaigns;Student Ambassador Network">
+                    <div class="w-full aspect-[4/5] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_4.jpg" alt="Brand Ambassador Portrait" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Sash Portrait ]</span>
+                        <span class="text-cobaltBlue">FT Unpas</span>
+                    </div>
+                </div>
+
+                <!-- Item 2: library_1 (Presentation) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="ba"
+                     data-lib-index="2"
+                     data-lib-title="School Promotion Roadshow"
+                     data-lib-role="Presenter & Representative"
+                     data-lib-org="Fakultas Teknik Unpas"
+                     data-lib-img="/images/library_1.jpg"
+                     data-lib-desc="Presenting faculty programs, infrastructure benefits, and academic tracks to prospective students. Engaging high school seniors during university socialization roadshows."
+                     data-lib-points="Interactive Presentation Delivery;Fostering Student Engagement;Q&A Sessions about College Life;Public Communications & Outreach">
+                    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_1.jpg" alt="High School Socialization" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Presentation ]</span>
+                        <span class="text-cobaltBlue">FT Unpas</span>
+                    </div>
+                </div>
+
+                <!-- Item 3: library_3 (Auditorium) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="ba"
+                     data-lib-index="3"
+                     data-lib-title="Auditorium Outreach"
+                     data-lib-role="Representative Ambassador"
+                     data-lib-org="Fakultas Teknik Unpas"
+                     data-lib-img="/images/library_3.jpg"
+                     data-lib-desc="Group presentation and socialization event held with high school students inside the main auditorium, building interactive communication channels."
+                     data-lib-points="Group Mentorship & Dialogues;Sharing Academic Experiences;Collaboration with School Coordinators;Guidance Counseling Representation">
+                    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_3.jpg" alt="Auditorium Group Photo" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Group Outreach ]</span>
+                        <span class="text-cobaltBlue">FT Unpas</span>
+                    </div>
+                </div>
+
+                <!-- Item 4: library_2 (Podium) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="hmtif"
+                     data-lib-index="4"
+                     data-lib-title="Student Governance Podium"
+                     data-lib-role="Staff of Kominfo Department"
+                     data-lib-org="HMTIF Unpas"
+                     data-lib-img="/images/library_2.jpg"
+                     data-lib-desc="Serving in the communications department of Himpunan Mahasiswa Teknik Informatika. Actively leading student announcements, event documentation, and news publishing campaigns."
+                     data-lib-points="Student Governance & Leadership;Visual Design Coordination;Information Flow Management;Podium Public Speaking">
+                    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_2.jpg" alt="Podium Speech HMTIF" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Speech & Media ]</span>
+                        <span class="text-cobaltBlue">HMTIF Unpas</span>
+                    </div>
+                </div>
+
+                <!-- Item 5: library_6 (GDGOC White Shirt) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="gdgoc"
+                     data-lib-index="5"
+                     data-lib-title="Head of Media Creative"
+                     data-lib-role="GDGOC Unpas Leadership"
+                     data-lib-org="GDGOC Unpas"
+                     data-lib-img="/images/library_6.jpg"
+                     data-lib-desc="Leading the media creative division for Google Developer Groups on Campus (GDGOC) Unpas, managing promotional kits, brand alignment, workshop media, and visual recording."
+                     data-lib-points="GDGOC Unpas Brand Management;Creative Team Coordination;Social Media Strategy & Asset Kits;Developer Event Photography & Coverage">
+                    <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_6.jpg" alt="GDGOC Unpas uniform" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Brand Creative ]</span>
+                        <span class="text-cobaltBlue">GDGOC Unpas</span>
+                    </div>
+                </div>
+
+                <!-- Item 6: library_5 (GGJ Localhost) -->
+                <div class="lib-card border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg p-3 hover-lift shadow-sm cursor-pointer group" 
+                     data-lib-cat="ggj"
+                     data-lib-index="6"
+                     data-lib-title="Global Game Jam 2026"
+                     data-lib-role="Game Designer & Project Manager"
+                     data-lib-org="Team localhost"
+                     data-lib-img="/images/library_5.jpg"
+                     data-lib-desc="Led team localhost at GGJ Bandung 2026, developing an intensive 48h 2D pixel-art game from concept blueprints to final Unity integration."
+                     data-lib-points="Game Design Systems & Level Blueprint;Project Management & Timeline Execution;Collaborative Unity Development;Final Pitch & Deployment Submission">
+                    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl border border-charcoalText/10 bg-neutral-900">
+                        <img src="/images/library_5.jpg" alt="Global Game Jam Team" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <div class="mt-3 flex justify-between items-center font-tech text-[10px] font-bold uppercase tracking-wider text-charcoalText/60">
+                        <span>[ Game Jam Leader ]</span>
+                        <span class="text-cobaltBlue">GGJ 2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LIBRARY DETAILS LIGHTBOX MODAL -->
+    <div id="lib-lightbox" class="fixed inset-0 w-full h-full bg-charcoalText/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 md:p-8 no-print">
+        <div class="w-full max-w-4xl bg-creamBg border-2 border-charcoalText rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in fade-in zoom-in duration-300 max-h-[90vh] md:max-h-[85vh]">
+            
+            <!-- Left Side: Image Container -->
+            <div class="w-full md:w-1/2 bg-[#121212] flex items-center justify-center p-4 border-b-2 md:border-b-0 md:border-r-2 border-charcoalText overflow-hidden relative min-h-[250px] md:min-h-0">
+                <img id="lightbox-img" src="" alt="Milestone Image" class="max-w-full max-h-[35vh] md:max-h-[70vh] object-contain rounded-lg">
+                <!-- Watermark -->
+                <span class="absolute bottom-3 left-3 text-[9px] font-tech font-bold uppercase text-creamBg/40 tracking-wider">[ library.arch ]</span>
+            </div>
+
+            <!-- Right Side: Editorial Info Content -->
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-creamBg">
+                <!-- Header Title & Controls -->
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div class="font-tech text-xs font-bold uppercase tracking-widest text-cobaltBlue" id="lightbox-org-badge">
+                            <!-- Organisation -->
+                        </div>
+                        <button id="close-lightbox-btn" class="text-charcoalText hover:text-cobaltBlue transition-colors font-bold text-xs uppercase font-tech tracking-wider" aria-label="Close details">
+                            ✖ Close
+                        </button>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-extrabold uppercase font-tech leading-tight text-charcoalText" id="lightbox-title">
+                            <!-- Milestone Title -->
+                        </h3>
+                        <p class="text-xs font-bold uppercase font-tech tracking-wide text-charcoalText/50" id="lightbox-role">
+                            <!-- Role Title -->
+                        </p>
+                    </div>
+
+                    <div class="border-b border-charcoalText/10 py-1"></div>
+
+                    <!-- Description -->
+                    <p class="text-charcoalText/80 text-xs md:text-sm leading-relaxed" id="lightbox-desc">
+                        <!-- Description text -->
+                    </p>
+
+                    <!-- Achievements Points list -->
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-charcoalText/40 font-tech">Key Focus Areas</span>
+                        <ul class="space-y-1.5 text-xs text-charcoalText/75 font-semibold font-tech" id="lightbox-points">
+                            <!-- List elements -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer details status -->
+                <div class="pt-6 mt-6 border-t border-charcoalText/10 flex justify-between items-center text-[9px] font-bold uppercase font-tech text-charcoalText/50">
+                    <span>Repository Record</span>
+                    <span id="lightbox-index-badge">01/06</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CONTACT SECTION (Minimalist Underline Layout) -->
     <section id="contact" class="py-24 px-6 md:px-12 scroll-reveal relative z-10 bg-creamBg">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center space-x-3 mb-16 font-tech">
-                <span class="text-sm font-bold text-cobaltBlue">04 /</span>
+                <span class="text-sm font-bold text-cobaltBlue">05 /</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter">Connection</h2>
             </div>
 
@@ -702,6 +915,100 @@
                 if (physicsAnimFrameId) {
                     cancelAnimationFrame(physicsAnimFrameId);
                 }
+            }
+
+            // ----------------------------------------------------
+            // 2.5. LIBRARY SECTION FILTERING & LIGHTBOX
+            // ----------------------------------------------------
+            const libFilterBtns = document.querySelectorAll('.lib-filter-btn');
+            const libCards = document.querySelectorAll('.lib-card');
+            
+            libFilterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-lib-filter');
+
+                    // Reset active button style
+                    libFilterBtns.forEach(b => {
+                        b.classList.remove('bg-charcoalText', 'text-creamBg');
+                        b.classList.add('bg-creamBg', 'text-charcoalText');
+                    });
+                    btn.classList.remove('bg-creamBg', 'text-charcoalText');
+                    btn.classList.add('bg-charcoalText', 'text-creamBg');
+
+                    // Filter cards
+                    libCards.forEach(card => {
+                        const cat = card.getAttribute('data-lib-cat');
+                        if (filter === 'all' || cat === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Lightbox Modal Handlers
+            const libLightbox = document.getElementById('lib-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxOrg = document.getElementById('lightbox-org-badge');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxRole = document.getElementById('lightbox-role');
+            const lightboxDesc = document.getElementById('lightbox-desc');
+            const lightboxPoints = document.getElementById('lightbox-points');
+            const lightboxIndex = document.getElementById('lightbox-index-badge');
+            const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+
+            if (libCards.length > 0 && libLightbox) {
+                libCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const img = card.getAttribute('data-lib-img');
+                        const title = card.getAttribute('data-lib-title');
+                        const role = card.getAttribute('data-lib-role');
+                        const org = card.getAttribute('data-lib-org');
+                        const desc = card.getAttribute('data-lib-desc');
+                        const index = card.getAttribute('data-lib-index');
+                        const pointsAttr = card.getAttribute('data-lib-points') || '';
+                        
+                        // Set attributes
+                        lightboxImg.src = img;
+                        lightboxImg.alt = title;
+                        lightboxOrg.textContent = `[ ${org} ]`;
+                        lightboxTitle.textContent = title;
+                        lightboxRole.textContent = role;
+                        lightboxDesc.textContent = desc;
+                        lightboxIndex.textContent = `${index.padStart(2, '0')} / 06`;
+
+                        // Render bullet points
+                        lightboxPoints.innerHTML = '';
+                        if (pointsAttr) {
+                            const points = pointsAttr.split(';');
+                            points.forEach(pt => {
+                                const li = document.createElement('li');
+                                li.textContent = `✦ ${pt.trim()}`;
+                                lightboxPoints.appendChild(li);
+                            });
+                        }
+
+                        // Open modal
+                        libLightbox.classList.remove('hidden');
+                        libLightbox.classList.add('flex');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+
+                closeLightboxBtn.addEventListener('click', () => {
+                    libLightbox.classList.remove('flex');
+                    libLightbox.classList.add('hidden');
+                    document.body.style.overflow = '';
+                });
+
+                libLightbox.addEventListener('click', (e) => {
+                    if (e.target === libLightbox) {
+                        libLightbox.classList.remove('flex');
+                        libLightbox.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }
+                });
             }
         });
     </script>

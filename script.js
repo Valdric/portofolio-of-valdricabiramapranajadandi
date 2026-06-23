@@ -853,5 +853,99 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 500);
     }
   }
+
+  // ----------------------------------------------------
+  // 9. LIBRARY SECTION FILTERING & LIGHTBOX
+  // ----------------------------------------------------
+  const libFilterBtns = document.querySelectorAll('.lib-filter-btn');
+  const libCards = document.querySelectorAll('.lib-card');
+  
+  libFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-lib-filter');
+
+      // Reset active button style
+      libFilterBtns.forEach(b => {
+        b.classList.remove('bg-charcoalText', 'text-creamBg');
+        b.classList.add('bg-creamBg', 'text-charcoalText');
+      });
+      btn.classList.remove('bg-creamBg', 'text-charcoalText');
+      btn.classList.add('bg-charcoalText', 'text-creamBg');
+
+      // Filter cards
+      libCards.forEach(card => {
+        const cat = card.getAttribute('data-lib-cat');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Lightbox Modal Handlers
+  const libLightbox = document.getElementById('lib-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxOrg = document.getElementById('lightbox-org-badge');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxRole = document.getElementById('lightbox-role');
+  const lightboxDesc = document.getElementById('lightbox-desc');
+  const lightboxPoints = document.getElementById('lightbox-points');
+  const lightboxIndex = document.getElementById('lightbox-index-badge');
+  const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+
+  if (libCards.length > 0 && libLightbox) {
+    libCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.getAttribute('data-lib-img');
+        const title = card.getAttribute('data-lib-title');
+        const role = card.getAttribute('data-lib-role');
+        const org = card.getAttribute('data-lib-org');
+        const desc = card.getAttribute('data-lib-desc');
+        const index = card.getAttribute('data-lib-index');
+        const pointsAttr = card.getAttribute('data-lib-points') || '';
+        
+        // Set attributes
+        lightboxImg.src = img;
+        lightboxImg.alt = title;
+        lightboxOrg.textContent = `[ ${org} ]`;
+        lightboxTitle.textContent = title;
+        lightboxRole.textContent = role;
+        lightboxDesc.textContent = desc;
+        lightboxIndex.textContent = `${index.padStart(2, '0')} / 06`;
+
+        // Render bullet points
+        lightboxPoints.innerHTML = '';
+        if (pointsAttr) {
+          const points = pointsAttr.split(';');
+          points.forEach(pt => {
+            const li = document.createElement('li');
+            li.textContent = `✦ ${pt.trim()}`;
+            lightboxPoints.appendChild(li);
+          });
+        }
+
+        // Open modal
+        libLightbox.classList.remove('hidden');
+        libLightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeLightboxBtn.addEventListener('click', () => {
+      libLightbox.classList.remove('flex');
+      libLightbox.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+
+    libLightbox.addEventListener('click', (e) => {
+      if (e.target === libLightbox) {
+        libLightbox.classList.remove('flex');
+        libLightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+  }
 });
 
