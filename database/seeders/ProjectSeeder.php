@@ -104,6 +104,15 @@ class ProjectSeeder extends Seeder
                 'external_url' => 'https://kasiduit.my.id/',
                 'media' => ['/images/kasiduit.png'],
                 'order' => 10,
+            ],
+            [
+                'title' => 'Gameseed',
+                'tagline' => 'An action/simulation game built for the Gameseed 2026 Game Jam.',
+                'tags' => ['Unity 2D', 'C#', 'Game Jam', 'Action'],
+                'description' => 'An action/simulation game built for the Gameseed 2026 Game Jam competition. Designed around resource management, planting seeds, and ecological restoration. Features C# velocity mechanics, dynamic grid environments, and classic retro arcade UI elements.',
+                'external_url' => 'https://youtu.be/yJB7bejT50E',
+                'media' => ['/images/gameseed.png'],
+                'order' => 11,
             ]
         ];
 

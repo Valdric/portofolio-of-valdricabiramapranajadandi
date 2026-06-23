@@ -263,7 +263,9 @@
                         $cardBg = 'bg-creamBg';
                         $isGame = str_contains($project->external_url, 'itch.io') 
                                || str_contains($project->external_url, 'drive.google.com') 
-                               || str_contains($project->external_url, 'globalgamejam.org');
+                               || str_contains($project->external_url, 'globalgamejam.org')
+                               || str_contains($project->external_url, 'youtu.be')
+                               || str_contains($project->external_url, 'youtube.com');
                         
                         $categoryAttr = $isGame ? 'game' : 'web';
                         
@@ -277,7 +279,18 @@
                         }
                         
                         $accentColor = 'text-cobaltBlue';
-                        $btnText = $isGame ? (str_contains($project->external_url, 'drive.google.com') ? 'Download ↗' : 'Play Game ↗') : 'Visit Web ↗';
+                        
+                        if ($isGame) {
+                            if (str_contains($project->external_url, 'drive.google.com')) {
+                                $btnText = 'Download ↗';
+                            } elseif (str_contains($project->external_url, 'youtu.be') || str_contains($project->external_url, 'youtube.com')) {
+                                $btnText = 'Watch Demo ↗';
+                            } else {
+                                $btnText = 'Play Game ↗';
+                            }
+                        } else {
+                            $btnText = 'Visit Web ↗';
+                        }
                     @endphp
                     
                     <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden {{ $cardBg }} hover-lift transition-all duration-300 flex flex-col justify-between" data-category="{{ $categoryAttr }}">
