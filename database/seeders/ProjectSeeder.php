@@ -95,6 +95,15 @@ class ProjectSeeder extends Seeder
                 'external_url' => 'https://valdric.github.io/itw2023_project2_233040163/',
                 'media' => ['/images/ka24_food.png'],
                 'order' => 9,
+            ],
+            [
+                'title' => 'KasiDuit',
+                'tagline' => 'A secure, transparent crowdfunding and donation platform.',
+                'tags' => ['Laravel', 'PHP', 'Tailwind CSS', 'Crowdfunding'],
+                'description' => 'A secure and transparent web-based crowdfunding and donation platform designed to coordinate social campaigns and process public contributions. Features campaign management systems, donor tracking dashboards, and transparent financial reporting tools.',
+                'external_url' => 'https://kasiduit.my.id/',
+                'media' => ['/images/kasiduit.png'],
+                'order' => 10,
             ]
         ];
 

@@ -272,7 +272,7 @@
                             $taglineLabel = '[ Game Dev ]';
                         } elseif (str_contains($project->title, 'Cashier')) {
                             $taglineLabel = '[ Mobile POS ]';
-                        } elseif (str_contains($project->title, 'Portfolio') || str_contains($project->title, 'Landing')) {
+                        } elseif (str_contains($project->title, 'Portfolio') || str_contains($project->title, 'Landing') || str_contains($project->title, 'KasiDuit')) {
                             $taglineLabel = '[ Web Dev ]';
                         }
                         
