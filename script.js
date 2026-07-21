@@ -191,10 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.getElementById('carousel-next');
 
   if (scrollContainer && prevBtn && nextBtn) {
-    // Scroll distance (width of one item plus gap)
     function getScrollStep() {
       const firstSlide = scrollContainer.querySelector('.carousel-slide:not(.hidden)');
-      return firstSlide ? firstSlide.offsetWidth + 24 : 350; // default width + gap
+      return firstSlide ? firstSlide.offsetWidth + 24 : 350;
     }
 
     prevBtn.addEventListener('click', () => {
@@ -211,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     
-    // Disable/Enable buttons dynamically based on scroll boundary
     scrollContainer.addEventListener('scroll', () => {
       const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
       if (scrollContainer.scrollLeft <= 5) {
@@ -227,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Mouse Drag-to-Scroll Implementation
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -256,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - scrollContainer.offsetLeft;
-      const walk = (x - startX) * 1.5; // Scroll multiplier
+      const walk = (x - startX) * 1.5;
       scrollContainer.scrollLeft = scrollLeft - walk;
     });
   }
@@ -272,16 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
 
-        // Reset active button styles
         filterBtns.forEach(b => {
           b.classList.remove('bg-charcoalText', 'text-creamBg');
           b.classList.add('bg-creamBg', 'text-charcoalText');
         });
-        // Set current button active
         btn.classList.remove('bg-creamBg', 'text-charcoalText');
         btn.classList.add('bg-charcoalText', 'text-creamBg');
 
-        // Filter slides
         slides.forEach(slide => {
           const cat = slide.getAttribute('data-category');
           if (filter === 'all' || cat === filter) {
@@ -291,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Scroll back to the start of the container
         if (scrollContainer) {
           scrollContainer.scrollTo({
             left: 0,
@@ -327,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', handleScrollAnimation);
-  handleScrollAnimation(); // Initial trigger
+  handleScrollAnimation();
 
   // ==========================================
   // 5. SCROLLSPY (ACTIVE NAV LINK SCROLLING)
@@ -340,7 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
       if (window.scrollY >= sectionTop - 150) {
         currentSection = section.getAttribute('id');
       }
@@ -425,8 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fillStyle = this.color;
         ctx.fill();
-        
-        // Print-editorial outline style
         ctx.strokeStyle = '#121212';
         ctx.lineWidth = 1.5;
         ctx.stroke();
@@ -501,7 +491,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Spawn ball on sandbox click
     physicsCanvas.addEventListener('mousedown', (event) => {
       const rect = physicsCanvas.getBoundingClientRect();
       const clickX = event.clientX - rect.left;
@@ -525,7 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isPhysicsRunning) return;
       ctx.clearRect(0, 0, physicsCanvas.width, physicsCanvas.height);
       
-      // Draw minimal editorial light gridlines
       ctx.strokeStyle = 'rgba(18, 18, 18, 0.04)';
       ctx.lineWidth = 1;
       const gridSize = 40;
@@ -655,12 +643,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let isChatOpen = false;
     let hasWelcomed = false;
 
-    // Toggle Chat Window
     chatBtn.addEventListener('click', () => {
       isChatOpen = !isChatOpen;
       if (isChatOpen) {
         chatWindow.classList.add('open');
-        if (pulseDot) pulseDot.style.display = 'none'; // Hide notification dot once opened
+        if (pulseDot) pulseDot.style.display = 'none';
         if (!hasWelcomed) {
           sendWelcomeMessage();
           hasWelcomed = true;
@@ -676,7 +663,6 @@ document.addEventListener('DOMContentLoaded', () => {
       chatWindow.classList.remove('open');
     });
 
-    // Send Message Event
     chatSend.addEventListener('click', handleUserSend);
     chatInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
@@ -684,7 +670,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Suggestion Chips Click
     suggestionChips.forEach(chip => {
       chip.addEventListener('click', () => {
         const text = chip.getAttribute('data-question') || chip.textContent;
@@ -716,7 +701,6 @@ document.addEventListener('DOMContentLoaded', () => {
       chatMessages.appendChild(msgDiv);
       scrollToBottom();
 
-      // Bind cursor hover event to newly generated links in the bot message
       const links = msgDiv.querySelectorAll('a');
       const cursor = document.getElementById('custom-cursor');
       if (cursor) {
@@ -761,14 +745,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function formatMarkdown(text) {
-      // Bold text: **text** -> <strong>text</strong>
       let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Italic text: *text* -> <em>text</em>
       html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      // Hyperlinks: [text](url) -> <a> tag
       html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color: var(--color-accent-blue); text-decoration: underline; font-weight: bold;">$1</a>');
       
-      // Multi-line formatting: convert lists and paragraphs
       const lines = html.split('\n');
       let inList = false;
       for (let i = 0; i < lines.length; i++) {
@@ -797,7 +777,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return lines.join('\n');
     }
 
-    // Call API or Fallback
     function getAIResponse(userMessage) {
       showTypingIndicator();
 
@@ -820,18 +799,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.status === 'success' && data.reply) {
           addBotMessage(data.reply);
         } else {
-          // Key not configured or fallback status
           handleFallbackResponse(userMessage);
         }
       })
       .catch(err => {
-        // Direct fallback if running statically or server is offline
         removeTypingIndicator();
         handleFallbackResponse(userMessage);
       });
     }
 
-    // Offline / Client-Side Smart Local Matcher
     const localDatabase = [
       {
         keywords: ['siapa', 'profil', 'bio', 'tentang', 'about', 'who', 'nama', 'valdric', 'vabirama'],
@@ -872,7 +848,6 @@ document.addEventListener('DOMContentLoaded', () => {
       let bestMatch = null;
       let maxMatches = 0;
 
-      // Scan through local knowledge base
       localDatabase.forEach(item => {
         let matches = 0;
         item.keywords.forEach(keyword => {
@@ -892,7 +867,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (bestMatch && maxMatches > 0) {
           addBotMessage(bestMatch.response);
         } else {
-          // Default generic response detailing what users can ask
           addBotMessage("Saya mengerti. Namun, sebagai asisten virtual Valdric, lingkup informasi saya berfokus pada:\n- Profil, IPK (**3.55**), dan pendidikan Valdric di UNPAS\n- Keahlian teknis & Tech Stack\n- Detail proyek unggulan (**KasiDuit**, **Gosir**)\n- Minat magang di PT. Bank BJB Kantor Cabang Utama Bandung (Jalan Naripan)\n- Cara menghubungi Valdric\n\nSilakan ajukan pertanyaan seputar topik-topik di atas!");
         }
       }, 500);
@@ -909,7 +883,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-lib-filter');
 
-      // Reset active button style
       libFilterBtns.forEach(b => {
         b.classList.remove('bg-charcoalText', 'text-creamBg');
         b.classList.add('bg-creamBg', 'text-charcoalText');
@@ -917,7 +890,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.remove('bg-creamBg', 'text-charcoalText');
       btn.classList.add('bg-charcoalText', 'text-creamBg');
 
-      // Filter cards
       libCards.forEach(card => {
         const cat = card.getAttribute('data-lib-cat');
         if (filter === 'all' || cat === filter) {
@@ -929,7 +901,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Lightbox Modal Handlers
   const libLightbox = document.getElementById('lib-lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxOrg = document.getElementById('lightbox-org-badge');
@@ -955,7 +926,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const link = card.getAttribute('data-lib-link');
         const linkText = card.getAttribute('data-lib-link-text') || 'Watch Demo ↗';
         
-        // Set attributes
         lightboxImg.src = img;
         lightboxImg.alt = title;
         lightboxOrg.textContent = `[ ${org} ]`;
@@ -964,7 +934,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxDesc.textContent = desc;
         lightboxIndex.textContent = `${index.padStart(2, '0')} / 07`;
 
-        // Render bullet points
         lightboxPoints.innerHTML = '';
         if (pointsAttr) {
           const points = pointsAttr.split(';');
@@ -975,7 +944,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
 
-        // Render Link
         if (link) {
           lightboxLink.href = link;
           lightboxLink.textContent = linkText;
@@ -984,7 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
           lightboxLinkContainer.classList.add('hidden');
         }
 
-        // Open modal
         libLightbox.classList.remove('hidden');
         libLightbox.classList.add('flex');
         document.body.style.overflow = 'hidden';
@@ -1027,7 +994,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuOverlay.classList.remove('open');
       setTimeout(() => {
         mobileMenuOverlay.classList.add('hidden');
-      }, 400); // match transition duration
+      }, 400);
       document.body.style.overflow = '';
     };
 
@@ -1061,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
     window.addEventListener('scroll', handleScrollProgress);
-    handleScrollProgress(); // Initial check
+    handleScrollProgress();
   }
 });
 
@@ -1090,7 +1057,6 @@ document.addEventListener('DOMContentLoaded', () => {
       : ['#416afc', '#ffa5c6', '#121212', '#416afc'];
   }
 
-  // --- Click Burst Particle ---
   class BurstParticle {
     constructor(x, y) {
       const colors = getThemeColors();
@@ -1103,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.vy = Math.sin(angle) * speed;
       this.alpha = 1;
       this.size = Math.random() * 4 + 2;
-      this.type = Math.floor(Math.random() * 3); // 0=dot, 1=plus, 2=square
+      this.type = Math.floor(Math.random() * 3);
       this.gravity = 0.08;
       this.life = 1;
       this.decay = Math.random() * 0.025 + 0.015;
@@ -1123,19 +1089,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.strokeStyle = this.color;
       ctx.lineWidth = 1.5;
       if (this.type === 0) {
-        // Dot
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       } else if (this.type === 1) {
-        // Plus
         const s = this.size * 1.5;
         ctx.beginPath();
         ctx.moveTo(this.x - s, this.y); ctx.lineTo(this.x + s, this.y);
         ctx.moveTo(this.x, this.y - s); ctx.lineTo(this.x, this.y + s);
         ctx.stroke();
       } else {
-        // Square
         ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
       }
       ctx.restore();
@@ -1143,7 +1106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     get dead() { return this.life <= 0; }
   }
 
-  // --- Cursor Trail Particle ---
   class TrailParticle {
     constructor(x, y) {
       const colors = getThemeColors();
@@ -1151,7 +1113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.y = y;
       this.size = Math.random() * 2.5 + 0.5;
       this.alpha = Math.random() * 0.5 + 0.3;
-      this.color = colors[Math.floor(Math.random() * 2)]; // only accent colors
+      this.color = colors[Math.floor(Math.random() * 2)];
       this.life = 1;
       this.decay = Math.random() * 0.06 + 0.04;
     }
@@ -1172,17 +1134,13 @@ document.addEventListener('DOMContentLoaded', () => {
     get dead() { return this.life <= 0 || this.size < 0.2; }
   }
 
-  // Click Burst Trigger
   document.addEventListener('click', (e) => {
-    // Don't burst on buttons/links to avoid visual confusion with interactions
-    const tag = e.target.tagName;
     const count = 16;
     for (let i = 0; i < count; i++) {
       particles.push(new BurstParticle(e.clientX, e.clientY));
     }
   });
 
-  // Cursor Trail
   let mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -1192,18 +1150,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Render loop
   function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Update + draw trail
     for (let i = trailParticles.length - 1; i >= 0; i--) {
       trailParticles[i].update();
       trailParticles[i].draw();
       if (trailParticles[i].dead) trailParticles.splice(i, 1);
     }
 
-    // Update + draw burst
     for (let i = particles.length - 1; i >= 0; i--) {
       particles[i].update();
       particles[i].draw();
@@ -1214,7 +1169,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   render();
 })();
-
 
 // ==========================================
 // B. MAGNETIC BUTTON EFFECT
@@ -1239,7 +1193,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
-
 
 // ==========================================
 // C. 3D TILT CARD PARALLAX EFFECT
@@ -1270,13 +1223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial attach
   applyTilt();
-  // Re-attach for dynamically injected content
   const tiltObserver = new MutationObserver(() => applyTilt());
   tiltObserver.observe(document.body, { childList: true, subtree: true });
 })();
-
 
 // ==========================================
 // D. CYBER TEXT SCRAMBLE EFFECT
@@ -1313,7 +1263,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
   }
 
-  // Apply to hero h1 spans on hover & tap
   const heroSpans = document.querySelectorAll('.hero-slide-up');
   heroSpans.forEach(span => {
     const orig = span.textContent.trim();
@@ -1326,7 +1275,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Apply to section headings h2 on hover & tap
   const headings = document.querySelectorAll('h2');
   headings.forEach(h => {
     const orig = h.textContent.trim();
@@ -1338,7 +1286,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Preloader reveal scramble — fire when preloader hides
   const preloader = document.getElementById('preloader');
   if (preloader) {
     const observer = new MutationObserver(() => {
@@ -1355,12 +1302,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
-
 // ==========================================
 // E. SKILL SHIMMER & STAGGER SCROLL REVEAL
 // ==========================================
 (function() {
-  // Apply skill-shimmer to all ✦ list items in skill cards
   document.querySelectorAll('li').forEach(li => {
     if (li.textContent.trim().startsWith('✦')) {
       li.classList.add('skill-shimmer');
@@ -1369,7 +1314,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Staggered scroll-reveal with variable delay for sections
   const staggerParents = document.querySelectorAll('.grid');
   staggerParents.forEach(grid => {
     const children = grid.querySelectorAll(':scope > div, :scope > article, :scope > a');
@@ -1381,7 +1325,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Re-run intersection observer to pick up staggered items
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1390,9 +1333,75 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.scroll-reveal').forEach(el => io.observe(el));
 })();
 
+// ==========================================
+// F. ABOUT AVATAR 3-MODE TOGGLE (Real -> Pixel -> Vector)
+// ==========================================
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const avatarFrame = document.getElementById('avatar-frame');
+    const avatarImg = document.getElementById('about-avatar-img');
+    const avatarBadge = document.getElementById('avatar-mode-badge');
+    const avatarLabel = document.getElementById('avatar-label');
+    const avatarStatusTag = document.getElementById('avatar-status-tag');
 
+    if (avatarFrame && avatarImg) {
+      let modeIndex = 0; // 0: Real, 1: Pixel, 2: Vector
+      const modes = [
+        {
+          src: 'public/images/valdric.jpg',
+          grayscale: true,
+          badge: '⚡ Click for 2D Pixel',
+          label: '[ system.avatar ]',
+          statusText: 'REAL PHOTO',
+          statusColor: '#416afc'
+        },
+        {
+          src: 'public/images/valdric_pixel.png',
+          grayscale: false,
+          badge: '⚡ Click for 2D Vector',
+          label: '[ system.avatar_pixel ]',
+          statusText: '2D PIXEL ART',
+          statusColor: '#ffa5c6'
+        },
+        {
+          src: 'public/images/valdric_vector.png',
+          grayscale: false,
+          badge: '⚡ Click for Real Photo',
+          label: '[ system.avatar_vector ]',
+          statusText: '2D VECTOR ART',
+          statusColor: '#6384ff'
+        }
+      ];
 
+      avatarFrame.addEventListener('click', () => {
+        modeIndex = (modeIndex + 1) % modes.length;
+        const currentMode = modes[modeIndex];
+
+        avatarImg.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+        avatarImg.style.opacity = '0';
+        avatarImg.style.transform = 'scale(0.95)';
+
+        setTimeout(() => {
+          avatarImg.src = currentMode.src;
+          if (currentMode.grayscale) {
+            avatarImg.classList.add('grayscale');
+          } else {
+            avatarImg.classList.remove('grayscale');
+          }
+
+          if (avatarBadge) avatarBadge.textContent = currentMode.badge;
+          if (avatarLabel) avatarLabel.textContent = currentMode.label;
+          if (avatarStatusTag) {
+            avatarStatusTag.textContent = currentMode.statusText;
+            avatarStatusTag.style.color = currentMode.statusColor;
+          }
+
+          avatarImg.style.opacity = '1';
+          avatarImg.style.transform = 'scale(1)';
+        }, 150);
+      });
+    }
+  });
+})();

@@ -584,7 +584,6 @@ h1, h2, h3, h4, h5, h6 {
   fill: currentColor;
 }
 
-/* Typing Indicator Animation */
 .typing-dots {
   display: flex;
   align-items: center;
@@ -609,7 +608,6 @@ h1, h2, h3, h4, h5, h6 {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* Responsive adjustments */
 @media (max-width: 480px) {
   .ai-chat-widget {
     bottom: 16px;
@@ -622,7 +620,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Gentle Bobbing Floating Animation for Navigation Dock */
 @keyframes floatDock {
   0% { transform: translate(-50%, 0px); }
   50% { transform: translate(-50%, -6px); }
@@ -633,32 +630,23 @@ h1, h2, h3, h4, h5, h6 {
   animation: floatDock 4s ease-in-out infinite;
 }
 
-
-/* Card 3D transform properties */
 .tilt-card {
   transform-style: preserve-3d;
   transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
   will-change: transform;
 }
 
-/* Magnetic effect transition wrapper */
 .magnetic-effect {
   display: inline-block;
   will-change: transform;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* =============================================
-   NEON GLOW PULSE (applied to accent headings)
-   ============================================= */
 @keyframes neonPulse {
   0%, 100% { text-shadow: 0 0 4px currentColor, 0 0 12px currentColor; }
   50% { text-shadow: 0 0 0px currentColor; }
 }
 
-/* =============================================
-   GLITCH TEXT KEYFRAMES (hover on .glitch)
-   ============================================= */
 @keyframes glitch {
   0%   { clip-path: inset(0% 0 80% 0); transform: translate(-2px, 0); }
   20%  { clip-path: inset(40% 0 40% 0); transform: translate(2px, 0); }
@@ -668,9 +656,6 @@ h1, h2, h3, h4, h5, h6 {
   100% { clip-path: inset(80% 0 5% 0); transform: translate(0); }
 }
 
-/* =============================================
-   SCANLINE OVERLAY — subtle CRT effect
-   ============================================= */
 body::after {
   content: '';
   display: block;
@@ -687,7 +672,6 @@ body::after {
   z-index: 99998;
 }
 
-/* Dark mode scanline brightness slightly increased */
 :root.dark body::after {
   background: repeating-linear-gradient(
     to bottom,
@@ -698,17 +682,11 @@ body::after {
   );
 }
 
-/* =============================================
-   FADE-SLIDE ENTRANCE for HERO section
-   ============================================= */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =============================================
-   SHIMMER EFFECT for skill tags on hover
-   ============================================= */
 @keyframes shimmer {
   0%   { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -729,16 +707,10 @@ body::after {
   animation: shimmer 1.8s linear infinite;
 }
 
-/* =============================================
-   MOBILE OVERLAY NAV & RESPONSIVE POLISH
-   ============================================= */
-
-/* Scroll progress bar style */
 #scroll-progress {
   transition: width 0.1s ease-out;
 }
 
-/* Mobile Menu Overlay Animation */
 #mobile-menu-overlay {
   opacity: 0;
   pointer-events: none;
@@ -751,7 +723,6 @@ body::after {
   pointer-events: auto;
 }
 
-/* Mobile Menu Links slide up staggered entries */
 .mobile-menu-link {
   transform: translateY(30px);
   opacity: 0;
@@ -764,7 +735,6 @@ body::after {
   opacity: 1;
 }
 
-/* Stagger transition delay for links */
 #mobile-menu-overlay.open .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; }
 #mobile-menu-overlay.open .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; }
 #mobile-menu-overlay.open .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; }
@@ -773,7 +743,6 @@ body::after {
 #mobile-menu-overlay.open .mobile-menu-link:nth-child(6) { transition-delay: 0.35s; }
 #mobile-menu-overlay.open .mobile-menu-link:nth-child(7) { transition-delay: 0.4s; }
 
-/* Responsive widths for Carousel Project Cards */
 .carousel-slide {
   width: 85vw !important;
   max-width: 380px;
@@ -791,7 +760,6 @@ body::after {
   }
 }
 
-/* Mobile Milestone Lightbox constraints */
 @media (max-width: 767px) {
   #lib-lightbox > div {
     flex-direction: column !important;
@@ -810,14 +778,8 @@ body::after {
   }
 }
 
-/* Fix cursor pointer coarse rule for mobile menu buttons to override default cursor styles */
 @media (pointer: coarse) {
   .mobile-menu-link, #close-mobile-menu, #mobile-menu-btn, #mobile-theme-toggle-btn {
     cursor: pointer !important;
   }
 }
-
-
-
-
-

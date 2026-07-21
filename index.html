@@ -166,13 +166,14 @@
         <div class="lg:col-span-5 flex justify-center">
           <div class="relative w-full max-w-sm group border-2 border-charcoalText p-2 bg-creamHighlight rounded-2xl">
             <!-- Frame Container -->
-            <div class="w-full aspect-square overflow-hidden border border-charcoalText rounded-xl bg-creamBg">
-              <img src="public/images/valdric.jpg" alt="Valdric Abirama Pranaja Dandi" class="w-full h-full object-cover grayscale transition-all duration-500 transform group-hover:scale-105 group-hover:grayscale-0">
+            <div id="avatar-frame" class="w-full aspect-square overflow-hidden border border-charcoalText rounded-xl bg-creamBg cursor-pointer transition-all relative group">
+              <img id="about-avatar-img" src="public/images/valdric.jpg" alt="Valdric Abirama Pranaja Dandi" class="w-full h-full object-cover grayscale transition-all duration-300 transform group-hover:scale-105">
+              <span id="avatar-mode-badge" class="absolute bottom-2 right-2 px-2 py-0.5 bg-charcoalText/85 text-creamBg text-[9px] font-tech font-bold uppercase rounded opacity-90">⚡ Click for 2D Pixel</span>
             </div>
             <!-- Subtitle -->
             <div class="mt-4 flex justify-between items-center text-xs font-bold font-tech uppercase px-2 text-charcoalText">
-              <span>[ system.avatar ]</span>
-              <span>Informatics student</span>
+              <span id="avatar-label">[ system.avatar ]</span>
+              <span id="avatar-status-tag" class="text-cobaltBlue font-bold">REAL PHOTO</span>
             </div>
           </div>
         </div>
@@ -348,10 +349,8 @@
         
         <!-- Project 1: Cashier App ("Gosir") -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="web">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/gosir.jpg" alt="Cashier App" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Flutter
             </div>
@@ -381,10 +380,8 @@
 
         <!-- Project 2: Soul Extractor / Spectral -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/soul_extractor.png" alt="Soul Extractor" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity 2D
             </div>
@@ -414,10 +411,8 @@
 
         <!-- Project 3: Ooga Booga Attack -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/ooga_booga.png" alt="Ooga Booga Attack" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity 2D
             </div>
@@ -447,10 +442,8 @@
 
         <!-- Project 4: Her Fallacy -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/her_fallacy.png" alt="Her Fallacy" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity 2D
             </div>
@@ -479,10 +472,8 @@
 
         <!-- Project 5: Slider -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/slider.jpg" alt="Slider" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity 2D
             </div>
@@ -511,10 +502,8 @@
 
         <!-- Project 6: RoadToUnpas -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/roadtounpas.png" alt="RoadToUnpas" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity / Godot
             </div>
@@ -543,10 +532,8 @@
 
         <!-- Project 7: Intro Buddy -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/introbuddy.png" alt="Intro Buddy" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Mobile / Web
             </div>
@@ -575,10 +562,8 @@
 
         <!-- Project 8: Personal Web Portfolio v1 -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="web">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/portfolio_v1.png" alt="Personal Web Portfolio v1" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               HTML5
             </div>
@@ -608,10 +593,8 @@
 
         <!-- Project 9: KA24 Food Landing Page -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="web">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/ka24_food.png" alt="KA24 Food Landing Page" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               HTML5
             </div>
@@ -641,10 +624,8 @@
 
         <!-- Project 10: KasiDuit -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="web">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/kasiduit.png" alt="KasiDuit" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Laravel
             </div>
@@ -674,10 +655,8 @@
 
         <!-- Project 11: Gameseed -->
         <div class="carousel-slide flex-none w-[300px] md:w-[380px] border-2 border-charcoalText rounded-2xl overflow-hidden bg-creamBg hover-lift transition-all duration-300 flex flex-col justify-between" data-category="game">
-          <!-- Project Cover Graphic -->
           <div class="w-full h-40 overflow-hidden border-b-2 border-charcoalText bg-neutral-900 relative">
             <img src="public/images/gameseed.png" alt="Gameseed" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
-            <!-- Overlay Badge -->
             <div class="absolute top-3 right-3 px-2 py-0.5 bg-charcoalText text-creamBg text-[8px] font-bold font-tech uppercase tracking-wider rounded border border-charcoalText/20">
               Unity 2D
             </div>
@@ -894,17 +873,14 @@
       <!-- Left Side: Image Container -->
       <div class="w-full md:w-1/2 bg-[#121212] flex items-center justify-center p-4 border-b-2 md:border-b-0 md:border-r-2 border-charcoalText overflow-hidden relative min-h-[250px] md:min-h-0">
         <img id="lightbox-img" src="" alt="Milestone Image" class="max-w-full max-h-[35vh] md:max-h-[70vh] object-contain rounded-lg">
-        <!-- Watermark -->
         <span class="absolute bottom-3 left-3 text-[9px] font-tech font-bold uppercase text-creamBg/40 dark:text-charcoalText/40 tracking-wider">[ library.arch ]</span>
       </div>
 
       <!-- Right Side: Editorial Info Content -->
       <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-creamBg">
-        <!-- Header Title & Controls -->
         <div class="space-y-4">
           <div class="flex justify-between items-start">
             <div class="font-tech text-xs font-bold uppercase tracking-widest text-cobaltBlue" id="lightbox-org-badge">
-              <!-- Organisation -->
             </div>
             <button id="close-lightbox-btn" class="text-charcoalText hover:text-cobaltBlue transition-colors font-bold text-xs uppercase font-tech tracking-wider" aria-label="Close details">
               ✖ Close
@@ -913,29 +889,22 @@
 
           <div class="space-y-1">
             <h3 class="text-2xl font-extrabold uppercase font-tech leading-tight text-charcoalText" id="lightbox-title">
-              <!-- Milestone Title -->
             </h3>
             <p class="text-xs font-bold uppercase font-tech tracking-wide text-charcoalText/50" id="lightbox-role">
-              <!-- Role Title -->
             </p>
           </div>
 
           <div class="border-b border-charcoalText/10 py-1"></div>
 
-          <!-- Description -->
           <p class="text-charcoalText/80 text-xs md:text-sm leading-relaxed" id="lightbox-desc">
-            <!-- Description text -->
           </p>
 
-          <!-- Achievements Points list -->
           <div class="space-y-2">
             <span class="text-[10px] font-bold uppercase tracking-wider text-charcoalText/40 font-tech">Key Focus Areas</span>
             <ul class="space-y-1.5 text-xs text-charcoalText/75 font-semibold font-tech" id="lightbox-points">
-              <!-- List elements -->
             </ul>
           </div>
 
-          <!-- Optional External Link -->
           <div id="lightbox-link-container" class="pt-4 hidden">
             <a id="lightbox-link" href="" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 bg-cobaltBlue hover:bg-charcoalText text-creamBg font-bold text-xs uppercase tracking-wider rounded-full transition-all duration-300 font-tech">
               Watch Demo ↗
@@ -943,7 +912,6 @@
           </div>
         </div>
 
-        <!-- Footer details status -->
         <div class="pt-6 mt-6 border-t border-charcoalText/10 flex justify-between items-center text-[9px] font-bold uppercase font-tech text-charcoalText/50">
           <span>Repository Record</span>
           <span id="lightbox-index-badge">01/07</span>
@@ -998,25 +966,21 @@
         <!-- Forms Right -->
         <div class="lg:col-span-7">
           <form id="contact-form" class="space-y-8 p-6 sm:p-8 border-2 border-charcoalText rounded-2xl bg-creamBg">
-            <!-- Name -->
             <div class="flex flex-col space-y-2">
               <label for="form-name" class="text-[10px] font-bold uppercase tracking-widest font-tech text-charcoalText/50">Your Name</label>
               <input type="text" id="form-name" placeholder="Name" class="minimal-input py-3 text-sm" required>
             </div>
 
-            <!-- Email -->
             <div class="flex flex-col space-y-2">
               <label for="form-email" class="text-[10px] font-bold uppercase tracking-widest font-tech text-charcoalText/50">Email Coordinate</label>
               <input type="email" id="form-email" placeholder="Email" class="minimal-input py-3 text-sm" required>
             </div>
 
-            <!-- Message -->
             <div class="flex flex-col space-y-2">
               <label for="form-message" class="text-[10px] font-bold uppercase tracking-widest font-tech text-charcoalText/50">Details / Pitch</label>
               <textarea id="form-message" rows="4" placeholder="Your Message" class="minimal-input py-3 text-sm resize-none" required></textarea>
             </div>
 
-            <!-- Submit -->
             <button type="submit" class="w-full py-4 bg-charcoalText hover:bg-cobaltBlue text-creamBg font-extrabold uppercase text-xs tracking-widest font-tech transition-colors duration-300">
               Dispatch Transmission
             </button>
@@ -1087,7 +1051,6 @@
        ========================================== -->
   <div id="physics-modal" class="fixed inset-0 w-full h-full bg-charcoalText/50 backdrop-blur-md hidden items-center justify-center z-50 p-6">
     <div class="w-full max-w-3xl bg-creamBg border-2 border-charcoalText rounded-2xl overflow-hidden shadow-2xl flex flex-col">
-      <!-- Header -->
       <div class="px-6 py-4 bg-creamHighlight border-b-2 border-charcoalText flex items-center justify-between font-tech">
         <h3 class="text-sm font-extrabold uppercase tracking-wider">Physics Sandbox Engine</h3>
         <button id="close-physics-btn" class="text-charcoalText hover:text-red-600 transition-colors" aria-label="Close Sandbox">
@@ -1095,7 +1058,6 @@
         </button>
       </div>
       
-      <!-- Canvas -->
       <div class="relative bg-creamBg flex flex-col items-center">
         <canvas id="physics-canvas" class="w-full h-[400px]"></canvas>
         <div class="absolute bottom-4 left-4 right-4 pointer-events-none flex justify-between items-center text-[9px] font-bold font-tech uppercase text-charcoalText/65 bg-creamHighlight/90 py-1.5 px-3 rounded border border-charcoalText">
@@ -1104,7 +1066,6 @@
         </div>
       </div>
 
-      <!-- Footer -->
       <div class="px-6 py-4 bg-creamBg border-t-2 border-charcoalText flex justify-between items-center text-[10px] font-bold uppercase font-tech text-charcoalText">
         <span>Elastic collisions, dynamic math vectors</span>
         <button onclick="document.getElementById('physics-canvas').dispatchEvent(new Event('mousedown'))" class="px-3 py-1.5 border border-charcoalText bg-creamHighlight hover:bg-charcoalText hover:text-creamBg text-charcoalText transition-all">
@@ -1136,7 +1097,6 @@
 
   <!-- AI Chatbot Widget -->
   <div class="ai-chat-widget no-print">
-    <!-- Floating Action Button -->
     <button class="ai-chat-btn" aria-label="Tanya AI" title="Tanya AI seputar Valdric">
       <span class="pulse-dot"></span>
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1144,9 +1104,7 @@
       </svg>
     </button>
 
-    <!-- Chat Window -->
     <div class="ai-chat-window">
-      <!-- Header -->
       <div class="ai-chat-header">
         <div class="ai-chat-title-group">
           <span class="ai-chat-status"></span>
@@ -1159,10 +1117,8 @@
         </button>
       </div>
 
-      <!-- Messages area -->
       <div class="ai-chat-messages"></div>
 
-      <!-- Suggested questions -->
       <div class="ai-chat-suggestions">
         <button class="suggestion-chip" data-question="Siapa itu Valdric?">Siapa Valdric?</button>
         <button class="suggestion-chip" data-question="Berapa IPK Valdric saat ini?">Berapa IPK-nya?</button>
@@ -1172,7 +1128,6 @@
         <button class="suggestion-chip" data-question="Bagaimana cara menghubungi Valdric?">Hubungi Valdric</button>
       </div>
 
-      <!-- Input Area -->
       <div class="ai-chat-input-area">
         <input type="text" class="ai-chat-input" placeholder="Tanya sesuatu..." aria-label="Message Input">
         <button class="ai-chat-send" aria-label="Send Message">
