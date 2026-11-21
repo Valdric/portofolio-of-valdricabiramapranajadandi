@@ -1,4 +1,8 @@
 <x-layouts.app>
+  <!-- Seasonal Ambient Glow & Lightweight Seasonal Particle Canvas -->
+  <div id="seasonal-ambient-glow" aria-hidden="true"></div>
+  <canvas id="seasonal-canvas" aria-hidden="true"></canvas>
+
   <!-- Scroll Progress Indicator -->
   <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-cobaltBlue z-[99999] transition-all duration-75" style="width: 0%"></div>
 
@@ -32,14 +36,52 @@
   </div>
 
   <!-- TOP STATUS HEADER -->
-  <header class="w-full border-b-2 border-charcoalText bg-creamBg px-6 md:px-12 py-6 flex justify-between items-center z-30 relative font-tech">
-    <a href="#hero" class="text-xl md:text-2xl font-extrabold tracking-tighter uppercase flex items-center space-x-1.5">
-      <span class="px-2 py-0.5 bg-charcoalText text-creamBg rounded-sm">V</span>
-      <span>Abirama</span>
-    </a>
+  <header class="w-full border-b-2 border-charcoalText bg-creamBg px-4 sm:px-6 md:px-12 py-4 md:py-5 flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-6 z-30 relative font-tech transition-colors duration-300">
+    <div class="w-full lg:w-auto flex justify-between items-center">
+      <a href="#hero" class="text-xl md:text-2xl font-extrabold tracking-tighter uppercase flex items-center space-x-1.5">
+        <span class="px-2 py-0.5 bg-charcoalText text-creamBg rounded-sm">V</span>
+        <span>Abirama</span>
+      </a>
+
+      <div class="flex items-center space-x-2 lg:hidden">
+        <span id="season-active-indicator-mobile" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-creamHighlight border border-charcoalText/40 text-charcoalText">Auto</span>
+        <button id="header-mobile-theme-btn" class="px-3 py-1.5 border-2 border-charcoalText hover:bg-charcoalText hover:text-creamBg text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300" aria-label="Toggle Dark Mode">
+          [ ☾ ]
+        </button>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-auto flex items-center justify-center">
+      <div id="season-switcher" class="season-switcher" role="group" aria-label="Seasonal Theme Switcher">
+        <button type="button" class="season-btn active" data-season="auto" aria-pressed="true" title="Automatic Calendar Season">
+          <span id="auto-season-icon">🗓️</span>
+          <span>Auto</span>
+        </button>
+        <button type="button" class="season-btn" data-season="spring" aria-pressed="false" title="Spring Theme (Mar–May)">
+          <span>🌸</span>
+          <span class="hidden sm:inline">Spring</span>
+          <span class="sm:hidden">Spr</span>
+        </button>
+        <button type="button" class="season-btn" data-season="summer" aria-pressed="false" title="Summer Theme (Jun–Aug)">
+          <span>☀️</span>
+          <span class="hidden sm:inline">Summer</span>
+          <span class="sm:hidden">Sum</span>
+        </button>
+        <button type="button" class="season-btn" data-season="autumn" aria-pressed="false" title="Autumn Theme (Sep–Nov)">
+          <span>🍂</span>
+          <span class="hidden sm:inline">Autumn</span>
+          <span class="sm:hidden">Aut</span>
+        </button>
+        <button type="button" class="season-btn" data-season="winter" aria-pressed="false" title="Winter Theme (Dec–Feb)">
+          <span>❄️</span>
+          <span class="hidden sm:inline">Winter</span>
+          <span class="sm:hidden">Win</span>
+        </button>
+      </div>
+    </div>
     
-    <div class="flex items-center space-x-6">
-      <div class="hidden sm:flex items-center space-x-6 text-[11px] font-bold uppercase tracking-wider text-charcoalText/75">
+    <div class="hidden lg:flex items-center space-x-5">
+      <div class="flex items-center space-x-4 text-[11px] font-bold uppercase tracking-wider text-charcoalText/75">
         <div class="flex items-center">
           <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 inline-block animate-pulse"></span>
           <span>Open for commissions</span>
@@ -56,29 +98,35 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section id="hero" class="min-h-[90vh] flex flex-col justify-between pt-16 pb-24 px-6 md:px-12 border-b-2 border-charcoalText relative z-10">
+  <section id="hero" class="min-h-[88vh] flex flex-col justify-between pt-12 md:pt-16 pb-20 md:pb-24 px-5 sm:px-6 md:px-12 border-b-2 border-charcoalText relative z-10">
     <div class="max-w-7xl mx-auto w-full my-auto flex flex-col items-start justify-center">
-      <span class="text-xs font-bold uppercase tracking-widest text-charcoalText/60 mb-6 font-tech block">[ portfolio.2026 ]</span>
+      <div class="flex flex-wrap items-center gap-3 mb-6 font-tech">
+        <span class="text-xs font-bold uppercase tracking-widest text-charcoalText/60">[ portfolio.2026 ]</span>
+        <span id="hero-season-badge" class="season-status-pill">
+          <span id="hero-season-icon">🍂</span>
+          <span id="hero-season-text">Season: Autumn (Auto)</span>
+        </span>
+      </div>
 
-      <h1 class="text-5xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter uppercase leading-[0.85] mb-8 font-tech text-left flex flex-col">
+      <h1 class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter uppercase leading-[0.88] mb-8 font-tech text-left flex flex-col">
         <span class="block overflow-hidden"><span class="block translate-y-full hero-slide-up">valdric</span></span>
         <span class="block overflow-hidden"><span class="block translate-y-full hero-slide-up" style="transition-delay: 0.1s">abirama</span></span>
         <span class="block overflow-hidden"><span class="block translate-y-full hero-slide-up text-cobaltBlue" style="transition-delay: 0.2s">pranaja</span></span>
         <span class="block overflow-hidden"><span class="block translate-y-full hero-slide-up text-cobaltBlue" style="transition-delay: 0.3s">dandi</span></span>
       </h1>
 
-      <p class="text-xl md:text-3xl font-tech font-bold uppercase tracking-tight text-charcoalText/85 mb-10 text-left border-l-4 border-charcoalText pl-4">
-        a <span id="typing-target" class="text-cobaltBlue"></span>
+      <p class="text-lg sm:text-xl md:text-3xl font-tech font-bold uppercase tracking-tight text-charcoalText/85 mb-10 text-left border-l-4 border-charcoalText pl-4 min-h-[2em] sm:min-h-0 flex items-center flex-wrap">
+        <span>a&nbsp;</span><span id="typing-target" class="text-cobaltBlue"></span>
       </p>
 
-      <div class="flex flex-wrap gap-4 z-20">
-        <a href="#projects" class="px-8 py-4 bg-charcoalText hover:bg-cobaltBlue text-creamBg font-extrabold text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech">
+      <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 z-20 w-full sm:w-auto">
+        <a href="#projects" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-charcoalText hover:bg-cobaltBlue text-creamBg font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech text-center">
           [ View Projects ]
         </a>
-        <a href="/cv" class="px-8 py-4 bg-creamHighlight hover:bg-cobaltBlue hover:text-creamBg text-charcoalText border-2 border-charcoalText font-extrabold text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech">
-          [ View CV / Resume ]
+        <a id="download-cv-btn" href="/CV_Valdric.pdf" download="CV_Valdric_Abirama_Pranaja_Dandi.pdf" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-creamHighlight hover:bg-cobaltBlue hover:text-creamBg text-charcoalText border-2 border-charcoalText font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech text-center inline-flex items-center justify-center gap-2">
+          <span>[ ↓ Download CV ]</span>
         </a>
-        <a href="#contact" class="px-8 py-4 border-2 border-charcoalText hover:bg-creamHighlight text-charcoalText font-extrabold text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech">
+        <a href="#contact" class="px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-charcoalText hover:bg-creamHighlight text-charcoalText font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full transition-all duration-300 font-tech text-center">
           [ Let's Talk ]
         </a>
       </div>
@@ -393,7 +441,7 @@
     <a href="#skills" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
     <a href="#projects" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Work</a>
     <a href="#library" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Library</a>
-    <a href="/cv" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">CV</a>
+    <a href="/CV_Valdric.pdf" download="CV_Valdric_Abirama_Pranaja_Dandi.pdf" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">↓ CV</a>
     <a href="#contact" class="nav-link px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
   </nav>
 

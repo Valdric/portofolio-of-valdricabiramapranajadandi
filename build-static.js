@@ -55,6 +55,20 @@ function build() {
   } else {
     console.warn('Warning: public/images folder not found.');
   }
+
+  // Copy CV PDF files in public/
+  const pdfFiles = ['CV_Valdric.pdf', 'CV_Valdric_Abirama_Pranaja_Dandi.pdf'];
+  pdfFiles.forEach(pdf => {
+    const srcPdf = path.join(__dirname, 'public', pdf);
+    if (fs.existsSync(srcPdf)) {
+      const destPublicDir = path.join(distDir, 'public');
+      if (!fs.existsSync(destPublicDir)) {
+        fs.mkdirSync(destPublicDir, { recursive: true });
+      }
+      copyFile(srcPdf, path.join(destPublicDir, pdf));
+      copyFile(srcPdf, path.join(distDir, pdf));
+    }
+  });
   
   console.log('Static build completed successfully in "dist" directory.');
 }

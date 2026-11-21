@@ -17,11 +17,26 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 
-    <!-- Prevent Dark Theme Flash -->
+    <!-- Prevent Dark & Seasonal Theme Flash -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
+        (function() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+            function detectCalendarSeason() {
+                var m = new Date().getMonth();
+                if (m >= 2 && m <= 4) return 'spring';
+                if (m >= 5 && m <= 7) return 'summer';
+                if (m >= 8 && m <= 10) return 'autumn';
+                return 'winter';
+            }
+            var savedMode = localStorage.getItem('season_mode') || 'auto';
+            var activeSeason = (savedMode === 'auto' || !['spring', 'summer', 'autumn', 'winter'].includes(savedMode))
+                ? detectCalendarSeason()
+                : savedMode;
+            document.documentElement.setAttribute('data-season-mode', savedMode);
+            document.documentElement.setAttribute('data-season', activeSeason);
+        })();
     </script>
 </head>
 <body class="bg-creamBg text-charcoalText antialiased">
@@ -67,7 +82,7 @@
         <a href="{{ request()->is('cv') ? '/#skills' : '#skills' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Skills</a>
         <a href="{{ request()->is('cv') ? '/#projects' : '#projects' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Work</a>
         <a href="{{ request()->is('cv') ? '/#library' : '#library' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Library</a>
-        <a href="/cv" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech {{ request()->is('cv') ? 'nav-link-active' : '' }}">CV</a>
+        <a href="/CV_Valdric.pdf" download="CV_Valdric_Abirama_Pranaja_Dandi.pdf" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">↓ CV</a>
         <a href="{{ request()->is('cv') ? '/#contact' : '#contact' }}" class="nav-link px-4 py-2 text-xs font-bold uppercase tracking-wider text-charcoalText hover:bg-charcoalText hover:text-creamBg rounded-full transition-all duration-300 font-tech">Contact</a>
     </nav>
 

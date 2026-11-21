@@ -9,11 +9,11 @@
     --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Space Grotesk', sans-serif;
     
-    --color-creamBg: #FAF9F6;
-    --color-creamHighlight: #FFF6C6;
-    --color-charcoalText: #121212;
-    --color-cobaltBlue: #416afc;
-    --color-pastelPink: #ffa5c6;
+    --color-creamBg: rgb(var(--color-bg-rgb));
+    --color-creamHighlight: rgb(var(--color-bg-alt-rgb));
+    --color-charcoalText: rgb(var(--color-text-primary-rgb));
+    --color-cobaltBlue: rgb(var(--color-accent-blue-rgb));
+    --color-pastelPink: rgb(var(--color-accent-pink-rgb));
 }
 
 /* Custom Scrollbar */
@@ -67,15 +67,6 @@
     z-index: 9999;
 }
 
-/* Dark mode theme variable redefinitions */
-:root.dark {
-    --color-creamBg: #121212;
-    --color-creamHighlight: #1e1e1e;
-    --color-charcoalText: #FAF9F6;
-    --color-cobaltBlue: #6384ff;
-    --color-pastelPink: #ff8fb7;
-}
-
 /* Hide default cursor on desktop */
 @media (min-width: 768px) {
     body, a, button, input, textarea, select, [role="button"], .carousel-slide {
@@ -95,28 +86,28 @@
 
 /* Bottom Nav Dock */
 .bottom-nav-dock {
-    background-color: rgba(250, 249, 246, 0.85);
+    background-color: var(--color-bg-dock);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1.5px solid #121212;
+    border: 1.5px solid var(--color-text-primary);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* ScrollSpy Active Link */
 .nav-link-active {
-    background-color: #121212 !important;
-    color: #FAF9F6 !important;
+    background-color: var(--color-text-primary) !important;
+    color: var(--color-bg) !important;
 }
 
 /* Print-Editorial Grid Layout */
 .editorial-grid {
-    border-top: 2px solid #121212;
+    border-top: 2px solid var(--color-text-primary);
 }
 .editorial-col {
-    border-right: 2px solid #121212;
+    border-right: 2px solid var(--color-text-primary);
 }
 .editorial-row {
-    border-bottom: 2px solid #121212;
+    border-bottom: 2px solid var(--color-text-primary);
 }
 
 /* Horizontal Scroll Projects Slider */
@@ -148,12 +139,12 @@
 /* Underline Inputs (Minimalist Form) */
 .minimal-input {
     background: transparent;
-    border-bottom: 1.5px solid #121212;
-    color: #121212;
+    border-bottom: 1.5px solid var(--color-text-primary);
+    color: var(--color-text-primary);
     transition: border-color 0.3s ease;
 }
 .minimal-input:focus {
-    border-color: #416afc;
+    border-color: var(--color-accent-blue);
     outline: none;
 }
 

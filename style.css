@@ -11,6 +11,8 @@
   --color-text-secondary-rgb: 74, 74, 74;
   --color-accent-blue-rgb: 65, 106, 252;
   --color-accent-pink-rgb: 255, 165, 198;
+  --season-glow-1: rgba(65, 106, 252, 0.14);
+  --season-glow-2: rgba(255, 165, 198, 0.14);
   
   --color-bg: rgb(var(--color-bg-rgb));
   --color-bg-alt: rgb(var(--color-bg-alt-rgb));
@@ -19,7 +21,7 @@
   --color-accent-blue: rgb(var(--color-accent-blue-rgb));
   --color-accent-pink: rgb(var(--color-accent-pink-rgb));
   --color-border: rgba(var(--color-text-primary-rgb), 0.08);
-  --color-bg-dock: rgba(var(--color-bg-rgb), 0.85);
+  --color-bg-dock: rgba(var(--color-bg-rgb), 0.88);
 }
 
 :root.dark {
@@ -29,6 +31,100 @@
   --color-text-secondary-rgb: 160, 160, 160;
   --color-accent-blue-rgb: 99, 132, 255;
   --color-accent-pink-rgb: 255, 143, 183;
+  --season-glow-1: rgba(99, 132, 255, 0.12);
+  --season-glow-2: rgba(255, 143, 183, 0.12);
+}
+
+/* ==========================================
+   CALENDAR-BASED SEASONAL THEME PALETTES
+   ========================================== */
+
+/* 1. SPRING (Mar–May): Fresh botanical / cherry blossom pastel */
+:root[data-season="spring"] {
+  --color-bg-rgb: 245, 251, 247;
+  --color-bg-alt-rgb: 223, 245, 230;
+  --color-text-primary-rgb: 18, 38, 27;
+  --color-text-secondary-rgb: 60, 88, 72;
+  --color-accent-blue-rgb: 22, 138, 84;
+  --color-accent-pink-rgb: 244, 143, 177;
+  --season-glow-1: rgba(244, 143, 177, 0.22);
+  --season-glow-2: rgba(22, 138, 84, 0.14);
+}
+:root.dark[data-season="spring"] {
+  --color-bg-rgb: 13, 23, 17;
+  --color-bg-alt-rgb: 22, 38, 28;
+  --color-text-primary-rgb: 238, 250, 242;
+  --color-text-secondary-rgb: 152, 184, 163;
+  --color-accent-blue-rgb: 74, 222, 128;
+  --color-accent-pink-rgb: 249, 168, 212;
+  --season-glow-1: rgba(249, 168, 212, 0.16);
+  --season-glow-2: rgba(74, 222, 128, 0.13);
+}
+
+/* 2. SUMMER (Jun–Aug): Warm, sun-drenched palette with golden glowing light accents */
+:root[data-season="summer"] {
+  --color-bg-rgb: 255, 250, 238;
+  --color-bg-alt-rgb: 255, 234, 168;
+  --color-text-primary-rgb: 28, 20, 13;
+  --color-text-secondary-rgb: 92, 70, 50;
+  --color-accent-blue-rgb: 225, 82, 10;
+  --color-accent-pink-rgb: 245, 176, 25;
+  --season-glow-1: rgba(251, 191, 36, 0.30);
+  --season-glow-2: rgba(234, 88, 12, 0.16);
+}
+:root.dark[data-season="summer"] {
+  --color-bg-rgb: 22, 16, 11;
+  --color-bg-alt-rgb: 38, 28, 18;
+  --color-text-primary-rgb: 255, 248, 235;
+  --color-text-secondary-rgb: 190, 168, 142;
+  --color-accent-blue-rgb: 251, 146, 60;
+  --color-accent-pink-rgb: 250, 204, 21;
+  --season-glow-1: rgba(250, 204, 21, 0.18);
+  --season-glow-2: rgba(251, 146, 60, 0.14);
+}
+
+/* 3. AUTUMN (Sep–Nov): Cozy earthy / amber / terracotta harvest tones */
+:root[data-season="autumn"] {
+  --color-bg-rgb: 250, 243, 234;
+  --color-bg-alt-rgb: 240, 219, 194;
+  --color-text-primary-rgb: 34, 20, 13;
+  --color-text-secondary-rgb: 98, 68, 52;
+  --color-accent-blue-rgb: 185, 58, 14;
+  --color-accent-pink-rgb: 217, 119, 6;
+  --season-glow-1: rgba(217, 119, 6, 0.22);
+  --season-glow-2: rgba(185, 58, 14, 0.15);
+}
+:root.dark[data-season="autumn"] {
+  --color-bg-rgb: 23, 15, 11;
+  --color-bg-alt-rgb: 38, 25, 18;
+  --color-text-primary-rgb: 250, 240, 228;
+  --color-text-secondary-rgb: 184, 156, 136;
+  --color-accent-blue-rgb: 249, 115, 22;
+  --color-accent-pink-rgb: 245, 158, 11;
+  --season-glow-1: rgba(249, 115, 22, 0.16);
+  --season-glow-2: rgba(245, 158, 11, 0.13);
+}
+
+/* 4. WINTER (Dec–Feb): Crisp cool / icy alpine frost palette */
+:root[data-season="winter"] {
+  --color-bg-rgb: 244, 249, 255;
+  --color-bg-alt-rgb: 220, 236, 255;
+  --color-text-primary-rgb: 15, 23, 42;
+  --color-text-secondary-rgb: 71, 85, 105;
+  --color-accent-blue-rgb: 2, 132, 199;
+  --color-accent-pink-rgb: 129, 140, 248;
+  --season-glow-1: rgba(56, 189, 248, 0.22);
+  --season-glow-2: rgba(129, 140, 248, 0.16);
+}
+:root.dark[data-season="winter"] {
+  --color-bg-rgb: 11, 17, 30;
+  --color-bg-alt-rgb: 20, 31, 52;
+  --color-text-primary-rgb: 240, 247, 255;
+  --color-text-secondary-rgb: 148, 163, 184;
+  --color-accent-blue-rgb: 56, 189, 248;
+  --color-accent-pink-rgb: 165, 180, 252;
+  --season-glow-1: rgba(56, 189, 248, 0.16);
+  --season-glow-2: rgba(165, 180, 252, 0.14);
 }
 
 * {
@@ -608,15 +704,16 @@ h1, h2, h3, h4, h5, h6 {
   40% { transform: scale(1); opacity: 1; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .ai-chat-widget {
-    bottom: 16px;
+    bottom: 82px;
     right: 16px;
   }
   .ai-chat-window {
-    bottom: 68px;
+    bottom: 66px;
     width: calc(100vw - 32px);
-    height: 420px;
+    height: 400px;
+    max-height: calc(100vh - 170px);
   }
 }
 
@@ -779,7 +876,130 @@ body::after {
 }
 
 @media (pointer: coarse) {
-  .mobile-menu-link, #close-mobile-menu, #mobile-menu-btn, #mobile-theme-toggle-btn {
+  .mobile-menu-link, #close-mobile-menu, #mobile-menu-btn, #mobile-theme-toggle-btn, .season-btn {
     cursor: pointer !important;
+  }
+}
+
+/* ==========================================
+   SEASONAL AMBIENT LIGHTING & WEATHER LAYER
+   ========================================== */
+#seasonal-ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 88% 12%, var(--season-glow-1), transparent 46%),
+    radial-gradient(circle at 12% 85%, var(--season-glow-2), transparent 50%);
+  transition: background 0.6s ease;
+  will-change: opacity;
+}
+
+/* Summer sun-drenched warm glowing light ray accent */
+:root[data-season="summer"] #seasonal-ambient-glow::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 620px;
+  max-height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(251, 191, 36, 0.26) 0%,
+    rgba(249, 115, 22, 0.10) 42%,
+    transparent 70%
+  );
+  animation: summerSunPulse 7s ease-in-out infinite;
+}
+
+@keyframes summerSunPulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+#seasonal-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ==========================================
+   MANUAL SEASON SWITCHER PILL CONTROLS
+   ========================================== */
+.season-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 2px solid var(--color-text-primary);
+  border-radius: 9999px;
+  background-color: var(--color-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.season-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.season-btn:hover {
+  background-color: var(--color-bg-alt);
+}
+
+.season-btn.active {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg);
+}
+
+/* Seasonal badge in Hero */
+.season-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--color-text-primary);
+  border-radius: 9999px;
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+@media (max-width: 639px) {
+  .season-switcher {
+    width: 100%;
+    justify-content: space-between;
+    padding: 2px;
+  }
+  .season-btn {
+    flex: 1 1 0%;
+    padding: 5px 4px;
+    font-size: 9px;
+    letter-spacing: 0.03em;
   }
 }

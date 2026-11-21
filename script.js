@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
-  // 00. THEME SWITCHER LOGIC
+  // 00. THEME & CALENDAR-BASED SEASONAL ENGINE
   // ==========================================
   function applyTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
-    const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #mobile-theme-toggle-btn');
+    const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #mobile-theme-toggle-btn, #header-mobile-theme-btn');
     if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
       toggleBtns.forEach(btn => {
-        if (btn.id === 'mobile-theme-toggle-btn') {
+        if (btn.id === 'mobile-theme-toggle-btn' || btn.id === 'header-mobile-theme-btn') {
           btn.textContent = '[ ☀ ]';
         } else {
           btn.textContent = '[ ☀ Light ]';
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.classList.remove('dark');
       document.body.classList.remove('dark');
       toggleBtns.forEach(btn => {
-        if (btn.id === 'mobile-theme-toggle-btn') {
+        if (btn.id === 'mobile-theme-toggle-btn' || btn.id === 'header-mobile-theme-btn') {
           btn.textContent = '[ ☾ ]';
         } else {
           btn.textContent = '[ ☾ Dark ]';
@@ -30,12 +30,90 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTheme();
 
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('#theme-toggle-btn') || e.target.closest('#mobile-theme-toggle-btn');
+    const btn = e.target.closest('#theme-toggle-btn') || e.target.closest('#mobile-theme-toggle-btn') || e.target.closest('#header-mobile-theme-btn');
     if (btn) {
       const currentTheme = localStorage.getItem('theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', newTheme);
       applyTheme();
+    }
+  });
+
+  // Calendar-Based Seasonal Theme Engine
+  const SEASON_META = {
+    spring: { label: 'Spring', icon: '🌸', months: 'Mar–May' },
+    summer: { label: 'Summer', icon: '☀️', months: 'Jun–Aug' },
+    autumn: { label: 'Autumn', icon: '🍂', months: 'Sep–Nov' },
+    winter: { label: 'Winter', icon: '❄️', months: 'Dec–Feb' }
+  };
+
+  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function detectCalendarSeason(dateObj = new Date()) {
+    const month = dateObj.getMonth(); // 0 = Jan .. 11 = Dec
+    if (month >= 2 && month <= 4) return 'spring'; // Mar–May
+    if (month >= 5 && month <= 7) return 'summer'; // Jun–Aug
+    if (month >= 8 && month <= 10) return 'autumn'; // Sep–Nov
+    return 'winter'; // Dec–Feb
+  }
+
+  function applySeasonalTheme(mode) {
+    const validModes = ['auto', 'spring', 'summer', 'autumn', 'winter'];
+    const normalizedMode = validModes.includes(mode) ? mode : 'auto';
+    const calendarSeason = detectCalendarSeason();
+    const resolvedSeason = normalizedMode === 'auto' ? calendarSeason : normalizedMode;
+    const currentMonthLabel = MONTH_NAMES[new Date().getMonth()];
+
+    document.documentElement.setAttribute('data-season-mode', normalizedMode);
+    document.documentElement.setAttribute('data-season', resolvedSeason);
+    localStorage.setItem('season_mode', normalizedMode);
+
+    // Update season switcher buttons
+    const seasonBtns = document.querySelectorAll('#season-switcher .season-btn');
+    seasonBtns.forEach(btn => {
+      const btnSeason = btn.getAttribute('data-season');
+      const isActive = btnSeason === normalizedMode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // Update Auto icon to reflect the detected calendar season
+    const autoIconEl = document.getElementById('auto-season-icon');
+    if (autoIconEl && SEASON_META[calendarSeason]) {
+      autoIconEl.textContent = SEASON_META[calendarSeason].icon;
+    }
+
+    // Update Hero seasonal badge & mobile indicator
+    const meta = SEASON_META[resolvedSeason] || SEASON_META.autumn;
+    const heroIconEl = document.getElementById('hero-season-icon');
+    const heroTextEl = document.getElementById('hero-season-text');
+    const mobileIndicatorEl = document.getElementById('season-active-indicator-mobile');
+
+    if (heroIconEl) heroIconEl.textContent = meta.icon;
+    if (heroTextEl) {
+      heroTextEl.textContent = normalizedMode === 'auto'
+        ? `Season: ${meta.label} (Auto · ${currentMonthLabel})`
+        : `Season: ${meta.label} (${meta.months})`;
+    }
+    if (mobileIndicatorEl) {
+      mobileIndicatorEl.textContent = normalizedMode === 'auto'
+        ? `${meta.icon} Auto (${meta.label})`
+        : `${meta.icon} ${meta.label}`;
+    }
+
+    if (typeof window.setSeasonalWeather === 'function') {
+      window.setSeasonalWeather(resolvedSeason);
+    }
+  }
+
+  const initialSeasonMode = localStorage.getItem('season_mode') || 'auto';
+  applySeasonalTheme(initialSeasonMode);
+
+  document.addEventListener('click', (e) => {
+    const seasonBtn = e.target.closest('#season-switcher .season-btn');
+    if (seasonBtn) {
+      const targetMode = seasonBtn.getAttribute('data-season') || 'auto';
+      applySeasonalTheme(targetMode);
     }
   });
 
@@ -1051,10 +1129,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const trailParticles = [];
 
   function getThemeColors() {
+    const season = document.documentElement.getAttribute('data-season') || 'autumn';
     const isDark = document.documentElement.classList.contains('dark');
-    return isDark
-      ? ['#6384ff', '#ff8fb7', '#FAF9F6', '#FAF9F6']
-      : ['#416afc', '#ffa5c6', '#121212', '#416afc'];
+    const palettes = {
+      spring: isDark ? ['#4ade80', '#f9a8d4', '#eefaf2', '#86efac'] : ['#168a54', '#f48fb1', '#12261b', '#34d399'],
+      summer: isDark ? ['#fb923c', '#facc15', '#fff8eb', '#fdba74'] : ['#e1520a', '#f5b019', '#1c140d', '#fbbf24'],
+      autumn: isDark ? ['#f97316', '#f59e0b', '#faf0e4', '#fdba74'] : ['#b93a0e', '#d97706', '#22140d', '#ea580c'],
+      winter: isDark ? ['#38bdf8', '#a5b4fc', '#f0f7ff', '#7dd3fc'] : ['#0284c7', '#818cf8', '#0f172a', '#38bdf8']
+    };
+    return palettes[season] || palettes.autumn;
   }
 
   class BurstParticle {
@@ -1174,7 +1257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // B. MAGNETIC BUTTON EFFECT
 // ==========================================
 (function() {
-  const magnetTargets = document.querySelectorAll('a[href="#projects"], a[href="#contact"], a[href="cv.html"], a[href="/cv"], #theme-toggle-btn');
+  const magnetTargets = document.querySelectorAll('a[href="#projects"], a[href="#contact"], #download-cv-btn, a[href="cv.html"], a[href="/cv"], #theme-toggle-btn');
 
   magnetTargets.forEach(el => {
     el.classList.add('magnetic-effect');
@@ -1395,7 +1478,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (avatarLabel) avatarLabel.textContent = currentMode.label;
           if (avatarStatusTag) {
             avatarStatusTag.textContent = currentMode.statusText;
-            avatarStatusTag.style.color = currentMode.statusColor;
           }
 
           avatarImg.style.opacity = '1';
@@ -1404,4 +1486,256 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+})();
+
+// ==========================================
+// G. GPU-FRIENDLY SEASONAL AMBIENT WEATHER ENGINE
+//    - Spring (Mar-May): Falling sakura / blossom petals
+//    - Summer (Jun-Aug): Sun-drenched glowing golden light motes
+//    - Autumn (Sep-Nov): Gentle falling autumn leaves
+//    - Winter (Dec-Feb): Crisp lightweight snowfall
+// ==========================================
+(function() {
+  const canvas = document.getElementById('seasonal-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+  function resizeSeasonalCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resizeSeasonalCanvas();
+
+  let currentSeason = document.documentElement.getAttribute('data-season') || 'autumn';
+  let seasonalParticles = [];
+
+  function getTargetParticleCount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return 8;
+    }
+    return width < 768 ? 18 : 32;
+  }
+
+  function getSeasonPalette(season) {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (season === 'spring') {
+      return isDark
+        ? ['#f9a8d4', '#f472b6', '#fbcfe8', '#86efac']
+        : ['#f48fb1', '#ec407a', '#f8bbd0', '#6ee7b7'];
+    }
+    if (season === 'summer') {
+      return isDark
+        ? ['#facc15', '#fb923c', '#fde047', '#fdba74']
+        : ['#f59e0b', '#ea580c', '#fbbf24', '#f97316'];
+    }
+    if (season === 'autumn') {
+      return isDark
+        ? ['#f97316', '#f59e0b', '#ea580c', '#d97706', '#fb923c']
+        : ['#c2410c', '#d97706', '#ea580c', '#b45309', '#9a3412'];
+    }
+    // winter
+    return isDark
+      ? ['#ffffff', '#e0f2fe', '#bae6fd', '#c7d2fe']
+      : ['#0284c7', '#38bdf8', '#818cf8', '#7dd3fc'];
+  }
+
+  class SeasonalParticle {
+    constructor(season, randomY = true) {
+      this.reset(season, randomY);
+    }
+
+    reset(season, randomY = false) {
+      this.season = season;
+      const palette = getSeasonPalette(season);
+      this.color = palette[Math.floor(Math.random() * palette.length)];
+      this.x = Math.random() * width;
+      this.swayPhase = Math.random() * Math.PI * 2;
+      this.swaySpeed = Math.random() * 0.018 + 0.008;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.025;
+      this.flipPhase = Math.random() * Math.PI * 2;
+      this.flipSpeed = Math.random() * 0.025 + 0.01;
+
+      if (season === 'summer') {
+        // Warm sun-drenched glowing light motes float gently upward
+        this.y = randomY ? Math.random() * height : height + 20;
+        this.size = Math.random() * 10 + 5;
+        this.vy = -(Math.random() * 0.45 + 0.2);
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.35 + 0.18;
+      } else if (season === 'spring') {
+        // Falling blossom petals
+        this.y = randomY ? Math.random() * height : -20;
+        this.size = Math.random() * 5.5 + 4.5;
+        this.vy = Math.random() * 0.65 + 0.45;
+        this.vx = Math.random() * 0.4 - 0.1;
+        this.alpha = Math.random() * 0.38 + 0.35;
+      } else if (season === 'autumn') {
+        // Falling cozy autumn leaves
+        this.y = randomY ? Math.random() * height : -25;
+        this.size = Math.random() * 6.5 + 5.5;
+        this.vy = Math.random() * 0.75 + 0.5;
+        this.vx = Math.random() * 0.5 - 0.15;
+        this.alpha = Math.random() * 0.42 + 0.35;
+      } else {
+        // Winter snowfall
+        this.y = randomY ? Math.random() * height : -15;
+        this.size = Math.random() * 3.8 + 1.8;
+        this.vy = Math.random() * 0.8 + 0.45;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.45 + 0.3;
+      }
+    }
+
+    update() {
+      this.swayPhase += this.swaySpeed;
+      this.rotation += this.rotationSpeed;
+      this.flipPhase += this.flipSpeed;
+
+      if (this.season === 'summer') {
+        this.x += this.vx + Math.sin(this.swayPhase) * 0.35;
+        this.y += this.vy;
+        if (this.y < -30) this.reset(this.season, false);
+      } else if (this.season === 'spring') {
+        this.x += this.vx + Math.sin(this.swayPhase) * 0.65;
+        this.y += this.vy;
+        if (this.y > height + 25) this.reset(this.season, false);
+      } else if (this.season === 'autumn') {
+        this.x += this.vx + Math.cos(this.swayPhase) * 0.85;
+        this.y += this.vy;
+        if (this.y > height + 30) this.reset(this.season, false);
+      } else {
+        // winter
+        this.x += this.vx + Math.sin(this.swayPhase) * 0.4;
+        this.y += this.vy;
+        if (this.y > height + 20) this.reset(this.season, false);
+      }
+
+      if (this.x > width + 30) this.x = -25;
+      if (this.x < -30) this.x = width + 25;
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+
+      if (this.season === 'spring') {
+        // Draw cherry blossom petal
+        const flipScale = 0.55 + Math.abs(Math.cos(this.flipPhase)) * 0.45;
+        ctx.rotate(this.rotation);
+        ctx.scale(1, flipScale);
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        const s = this.size;
+        ctx.beginPath();
+        ctx.moveTo(0, s);
+        ctx.bezierCurveTo(-s * 1.1, s * 0.4, -s * 0.9, -s * 0.9, -s * 0.22, -s);
+        ctx.lineTo(0, -s * 0.65);
+        ctx.lineTo(s * 0.22, -s);
+        ctx.bezierCurveTo(s * 0.9, -s * 0.9, s * 1.1, s * 0.4, 0, s);
+        ctx.closePath();
+        ctx.fill();
+      } else if (this.season === 'summer') {
+        // Draw warm glowing sun-mote / solar orb
+        const pulse = 0.75 + Math.sin(this.swayPhase * 1.5) * 0.25;
+        const r = this.size * pulse;
+        ctx.globalAlpha = this.alpha * pulse;
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 2.2);
+        grad.addColorStop(0, this.color);
+        grad.addColorStop(0.45, this.color);
+        grad.addColorStop(1, 'rgba(251, 191, 36, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.season === 'autumn') {
+        // Draw cozy falling autumn leaf
+        const flipScale = 0.45 + Math.abs(Math.sin(this.flipPhase)) * 0.55;
+        ctx.rotate(this.rotation + Math.sin(this.swayPhase) * 0.35);
+        ctx.scale(1, flipScale);
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.color;
+        const s = this.size;
+        ctx.beginPath();
+        ctx.moveTo(0, -s * 1.1);
+        ctx.quadraticCurveTo(s * 0.95, -s * 0.25, 0, s * 1.1);
+        ctx.quadraticCurveTo(-s * 0.95, -s * 0.25, 0, -s * 1.1);
+        ctx.closePath();
+        ctx.fill();
+        // Subtle stem
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, s * 1.0);
+        ctx.lineTo(0, s * 1.45);
+        ctx.stroke();
+      } else {
+        // Draw crisp winter snowflake
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.color;
+        if (this.size > 3.6) {
+          ctx.rotate(this.rotation);
+          ctx.lineWidth = 1.1;
+          for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.moveTo(-this.size, 0);
+            ctx.lineTo(this.size, 0);
+            ctx.stroke();
+            ctx.rotate(Math.PI / 3);
+          }
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      ctx.restore();
+    }
+  }
+
+  function initSeasonalParticles(season) {
+    currentSeason = season;
+    const count = getTargetParticleCount();
+    seasonalParticles = [];
+    for (let i = 0; i < count; i++) {
+      seasonalParticles.push(new SeasonalParticle(season, true));
+    }
+  }
+
+  window.setSeasonalWeather = function(newSeason) {
+    initSeasonalParticles(newSeason || 'autumn');
+  };
+
+  window.addEventListener('resize', () => {
+    resizeSeasonalCanvas();
+    const targetCount = getTargetParticleCount();
+    while (seasonalParticles.length > targetCount) seasonalParticles.pop();
+    while (seasonalParticles.length < targetCount) {
+      seasonalParticles.push(new SeasonalParticle(currentSeason, true));
+    }
+  });
+
+  initSeasonalParticles(currentSeason);
+
+  function animateSeasonalWeather() {
+    if (!document.hidden) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < seasonalParticles.length; i++) {
+        seasonalParticles[i].update();
+        seasonalParticles[i].draw();
+      }
+    }
+    requestAnimationFrame(animateSeasonalWeather);
+  }
+  animateSeasonalWeather();
 })();
