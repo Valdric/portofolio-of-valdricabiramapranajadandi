@@ -23,19 +23,12 @@
             if (localStorage.getItem('theme') === 'dark') {
                 document.documentElement.classList.add('dark');
             }
-            function detectCalendarSeason() {
-                var m = new Date().getMonth();
-                if (m >= 2 && m <= 4) return 'spring';
-                if (m >= 5 && m <= 7) return 'summer';
-                if (m >= 8 && m <= 10) return 'autumn';
-                return 'winter';
-            }
-            var savedMode = localStorage.getItem('season_mode') || 'auto';
-            var activeSeason = (savedMode === 'auto' || !['spring', 'summer', 'autumn', 'winter'].includes(savedMode))
-                ? detectCalendarSeason()
-                : savedMode;
-            document.documentElement.setAttribute('data-season-mode', savedMode);
-            document.documentElement.setAttribute('data-season', activeSeason);
+            var m = new Date().getMonth();
+            var season = (m >= 2 && m <= 4) ? 'spring'
+                       : (m >= 5 && m <= 7) ? 'summer'
+                       : (m >= 8 && m <= 10) ? 'autumn'
+                       : 'winter';
+            document.documentElement.setAttribute('data-season', season);
         })();
     </script>
 </head>

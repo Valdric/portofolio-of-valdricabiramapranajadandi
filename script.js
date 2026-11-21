@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   function applyTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
-    const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #mobile-theme-toggle-btn, #header-mobile-theme-btn');
+    const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #mobile-theme-toggle-btn');
     if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
       toggleBtns.forEach(btn => {
-        if (btn.id === 'mobile-theme-toggle-btn' || btn.id === 'header-mobile-theme-btn') {
+        if (btn.id === 'mobile-theme-toggle-btn') {
           btn.textContent = '[ ☀ ]';
         } else {
           btn.textContent = '[ ☀ Light ]';
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.classList.remove('dark');
       document.body.classList.remove('dark');
       toggleBtns.forEach(btn => {
-        if (btn.id === 'mobile-theme-toggle-btn' || btn.id === 'header-mobile-theme-btn') {
+        if (btn.id === 'mobile-theme-toggle-btn') {
           btn.textContent = '[ ☾ ]';
         } else {
           btn.textContent = '[ ☾ Dark ]';
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTheme();
 
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('#theme-toggle-btn') || e.target.closest('#mobile-theme-toggle-btn') || e.target.closest('#header-mobile-theme-btn');
+    const btn = e.target.closest('#theme-toggle-btn') || e.target.closest('#mobile-theme-toggle-btn');
     if (btn) {
       const currentTheme = localStorage.getItem('theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -39,16 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Calendar-Based Seasonal Theme Engine
-  const SEASON_META = {
-    spring: { label: 'Spring', icon: '🌸', months: 'Mar–May' },
-    summer: { label: 'Summer', icon: '☀️', months: 'Jun–Aug' },
-    autumn: { label: 'Autumn', icon: '🍂', months: 'Sep–Nov' },
-    winter: { label: 'Winter', icon: '❄️', months: 'Dec–Feb' }
-  };
-
-  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+  // Automatic Calendar-Based Seasonal Theme Engine
   function detectCalendarSeason(dateObj = new Date()) {
     const month = dateObj.getMonth(); // 0 = Jan .. 11 = Dec
     if (month >= 2 && month <= 4) return 'spring'; // Mar–May
@@ -57,65 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'winter'; // Dec–Feb
   }
 
-  function applySeasonalTheme(mode) {
-    const validModes = ['auto', 'spring', 'summer', 'autumn', 'winter'];
-    const normalizedMode = validModes.includes(mode) ? mode : 'auto';
-    const calendarSeason = detectCalendarSeason();
-    const resolvedSeason = normalizedMode === 'auto' ? calendarSeason : normalizedMode;
-    const currentMonthLabel = MONTH_NAMES[new Date().getMonth()];
-
-    document.documentElement.setAttribute('data-season-mode', normalizedMode);
-    document.documentElement.setAttribute('data-season', resolvedSeason);
-    localStorage.setItem('season_mode', normalizedMode);
-
-    // Update season switcher buttons
-    const seasonBtns = document.querySelectorAll('#season-switcher .season-btn');
-    seasonBtns.forEach(btn => {
-      const btnSeason = btn.getAttribute('data-season');
-      const isActive = btnSeason === normalizedMode;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    // Update Auto icon to reflect the detected calendar season
-    const autoIconEl = document.getElementById('auto-season-icon');
-    if (autoIconEl && SEASON_META[calendarSeason]) {
-      autoIconEl.textContent = SEASON_META[calendarSeason].icon;
-    }
-
-    // Update Hero seasonal badge & mobile indicator
-    const meta = SEASON_META[resolvedSeason] || SEASON_META.autumn;
-    const heroIconEl = document.getElementById('hero-season-icon');
-    const heroTextEl = document.getElementById('hero-season-text');
-    const mobileIndicatorEl = document.getElementById('season-active-indicator-mobile');
-
-    if (heroIconEl) heroIconEl.textContent = meta.icon;
-    if (heroTextEl) {
-      heroTextEl.textContent = normalizedMode === 'auto'
-        ? `Season: ${meta.label} (Auto · ${currentMonthLabel})`
-        : `Season: ${meta.label} (${meta.months})`;
-    }
-    if (mobileIndicatorEl) {
-      mobileIndicatorEl.textContent = normalizedMode === 'auto'
-        ? `${meta.icon} Auto (${meta.label})`
-        : `${meta.icon} ${meta.label}`;
-    }
-
-    if (typeof window.setSeasonalWeather === 'function') {
-      window.setSeasonalWeather(resolvedSeason);
-    }
+  const activeCalendarSeason = detectCalendarSeason();
+  document.documentElement.setAttribute('data-season', activeCalendarSeason);
+  if (typeof window.setSeasonalWeather === 'function') {
+    window.setSeasonalWeather(activeCalendarSeason);
   }
-
-  const initialSeasonMode = localStorage.getItem('season_mode') || 'auto';
-  applySeasonalTheme(initialSeasonMode);
-
-  document.addEventListener('click', (e) => {
-    const seasonBtn = e.target.closest('#season-switcher .season-btn');
-    if (seasonBtn) {
-      const targetMode = seasonBtn.getAttribute('data-season') || 'auto';
-      applySeasonalTheme(targetMode);
-    }
-  });
 
   // ==========================================
   // 0. PRELOADER INTRO LOADING SEQUENCE

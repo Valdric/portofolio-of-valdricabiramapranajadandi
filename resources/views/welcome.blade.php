@@ -36,52 +36,14 @@
   </div>
 
   <!-- TOP STATUS HEADER -->
-  <header class="w-full border-b-2 border-charcoalText bg-creamBg px-4 sm:px-6 md:px-12 py-4 md:py-5 flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-6 z-30 relative font-tech transition-colors duration-300">
-    <div class="w-full lg:w-auto flex justify-between items-center">
-      <a href="#hero" class="text-xl md:text-2xl font-extrabold tracking-tighter uppercase flex items-center space-x-1.5">
-        <span class="px-2 py-0.5 bg-charcoalText text-creamBg rounded-sm">V</span>
-        <span>Abirama</span>
-      </a>
-
-      <div class="flex items-center space-x-2 lg:hidden">
-        <span id="season-active-indicator-mobile" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-creamHighlight border border-charcoalText/40 text-charcoalText">Auto</span>
-        <button id="header-mobile-theme-btn" class="px-3 py-1.5 border-2 border-charcoalText hover:bg-charcoalText hover:text-creamBg text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-all duration-300" aria-label="Toggle Dark Mode">
-          [ ☾ ]
-        </button>
-      </div>
-    </div>
-
-    <div class="w-full lg:w-auto flex items-center justify-center">
-      <div id="season-switcher" class="season-switcher" role="group" aria-label="Seasonal Theme Switcher">
-        <button type="button" class="season-btn active" data-season="auto" aria-pressed="true" title="Automatic Calendar Season">
-          <span id="auto-season-icon">🗓️</span>
-          <span>Auto</span>
-        </button>
-        <button type="button" class="season-btn" data-season="spring" aria-pressed="false" title="Spring Theme (Mar–May)">
-          <span>🌸</span>
-          <span class="hidden sm:inline">Spring</span>
-          <span class="sm:hidden">Spr</span>
-        </button>
-        <button type="button" class="season-btn" data-season="summer" aria-pressed="false" title="Summer Theme (Jun–Aug)">
-          <span>☀️</span>
-          <span class="hidden sm:inline">Summer</span>
-          <span class="sm:hidden">Sum</span>
-        </button>
-        <button type="button" class="season-btn" data-season="autumn" aria-pressed="false" title="Autumn Theme (Sep–Nov)">
-          <span>🍂</span>
-          <span class="hidden sm:inline">Autumn</span>
-          <span class="sm:hidden">Aut</span>
-        </button>
-        <button type="button" class="season-btn" data-season="winter" aria-pressed="false" title="Winter Theme (Dec–Feb)">
-          <span>❄️</span>
-          <span class="hidden sm:inline">Winter</span>
-          <span class="sm:hidden">Win</span>
-        </button>
-      </div>
-    </div>
+  <header class="w-full border-b-2 border-charcoalText bg-creamBg px-6 md:px-12 py-6 flex justify-between items-center z-30 relative font-tech transition-colors duration-300">
+    <a href="#hero" class="text-xl md:text-2xl font-extrabold tracking-tighter uppercase flex items-center space-x-1.5">
+      <span class="px-2 py-0.5 bg-charcoalText text-creamBg rounded-sm">V</span>
+      <span>Abirama</span>
+    </a>
     
-    <div class="hidden lg:flex items-center space-x-5">
-      <div class="flex items-center space-x-4 text-[11px] font-bold uppercase tracking-wider text-charcoalText/75">
+    <div class="flex items-center space-x-6">
+      <div class="hidden sm:flex items-center space-x-6 text-[11px] font-bold uppercase tracking-wider text-charcoalText/75">
         <div class="flex items-center">
           <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 inline-block animate-pulse"></span>
           <span>Open for commissions</span>
@@ -100,13 +62,7 @@
   <!-- HERO SECTION -->
   <section id="hero" class="min-h-[88vh] flex flex-col justify-between pt-12 md:pt-16 pb-20 md:pb-24 px-5 sm:px-6 md:px-12 border-b-2 border-charcoalText relative z-10">
     <div class="max-w-7xl mx-auto w-full my-auto flex flex-col items-start justify-center">
-      <div class="flex flex-wrap items-center gap-3 mb-6 font-tech">
-        <span class="text-xs font-bold uppercase tracking-widest text-charcoalText/60">[ portfolio.2026 ]</span>
-        <span id="hero-season-badge" class="season-status-pill">
-          <span id="hero-season-icon">🍂</span>
-          <span id="hero-season-text">Season: Autumn (Auto)</span>
-        </span>
-      </div>
+      <span class="text-xs font-bold uppercase tracking-widest text-charcoalText/60 mb-6 font-tech block">[ portfolio.2026 ]</span>
 
       <h1 class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter uppercase leading-[0.88] mb-8 font-tech text-left flex flex-col">
         <span class="block overflow-hidden"><span class="block translate-y-full hero-slide-up">valdric</span></span>
